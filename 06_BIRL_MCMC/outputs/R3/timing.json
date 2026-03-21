@@ -1,0 +1,10 @@
+{
+  "variant": "R3",
+  "per_step": 5.220018141746521,
+  "elapsed_s": 1305.0045354366302,
+  "sample_div_count": 0,
+  "sample_div_total": 50,
+  "sample_div_rate": 0.0,
+  "n_warmup_timing": 200,
+  "n_sample_timing": 50
+}

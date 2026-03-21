@@ -1,0 +1,13 @@
+{
+  "variant": "R3",
+  "model": "model_hier_noalpha",
+  "steps": 40000,
+  "final_elbo": -685723.5625,
+  "best_elbo": -682686.25,
+  "N_obs": 222023,
+  "N_hh": 15644,
+  "timestamp": "2026-03-19T21:41:35.643381",
+  "rho_med": 1.5,
+  "gamma_med": 28.64681625366211,
+  "beta_mean": 0.2224639654159546
+}

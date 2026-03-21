@@ -1,0 +1,46 @@
+# ============================================
+# Data files — restricted license (LSMS-ISA)
+# ============================================
+
+# Shared data directory
+data/
+
+# All binary data formats (may contain individual-level data)
+*.parquet
+*.npz
+*.pkl
+*.joblib
+
+# GPS coordinates (even jittered LSMS GPS — not for distribution)
+**/gps_points_for_gee.csv
+
+# LightGBM model files (safe, but large — regenerate from notebooks)
+04_Env_Model/model_mu.txt
+04_Env_Model/model_sigma.txt
+
+# Optuna studies
+04_Env_Model/study_*.pkl
+
+# ============================================
+# Notebook outputs (clear before committing)
+# ============================================
+# Use: jupyter nbconvert --clear-output --inplace *.ipynb
+
+# ============================================
+# Python artifacts
+# ============================================
+__pycache__/
+*.pyc
+*.pyo
+
+# ============================================
+# Archived plots (not needed in repo)
+# ============================================
+_archived_plots/
+
+# ============================================
+# OS / IDE
+# ============================================
+.DS_Store
+*:Zone.Identifier
+*.log

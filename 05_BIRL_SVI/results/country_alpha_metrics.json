@@ -1,0 +1,14 @@
+{
+  "variant": "country_alpha",
+  "model": "model_country_alpha",
+  "steps": 40000,
+  "final_elbo": -672426.9375,
+  "best_elbo": -666238.0625,
+  "N_obs": 222023,
+  "N_hh": 15644,
+  "timestamp": "2026-03-19T20:53:08.657475",
+  "rho_med": 0.7012825012207031,
+  "alpha_med": -1.4850528240203857,
+  "gamma_med": 0.7325276136398315,
+  "beta_mean": 0.13564148545265198
+}

@@ -1,0 +1,14 @@
+# Core (required)
+# For TPU: pip install jax[tpu] -f https://storage.googleapis.com/jax-releases/libtpu_releases.html
+# For GPU: pip install jax[cuda12]
+# For CPU: pip install jax
+jax>=0.4.30
+jaxlib>=0.4.30
+numpyro>=0.15
+numpy>=1.26,<2.0
+pandas>=2.1
+pyarrow>=14.0
+
+# Diagnostics (optional but recommended)
+arviz>=0.18
+scipy>=1.12

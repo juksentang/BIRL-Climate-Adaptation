@@ -1,0 +1,13 @@
+============================================================
+Convergence: hier_noalpha
+============================================================
+
+Divergences: 0/12000 (0.0000)  [PASS]
+
+--- Quick Report: hier_noalpha ---
+
+gamma (USD): median=29.0, P5=1.9, P95=29.8
+rho:   median=2.61, P5=0.29, P95=3.32
+
+Posterior correlations (subsample 3000 HH):
+  rho_gamma      : -0.001  [PASS]

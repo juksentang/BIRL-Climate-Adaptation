@@ -1,0 +1,13 @@
+============================================================
+Convergence: R3
+============================================================
+
+Divergences: 0/12000 (0.0000)  [PASS]
+
+--- Quick Report: R3 ---
+
+gamma (USD): median=29.7, P5=5.5, P95=29.8
+rho:   median=1.50, P5=1.50, P95=1.50
+
+Posterior correlations (subsample 3000 HH):
+  rho_gamma      : nan  [WARN]

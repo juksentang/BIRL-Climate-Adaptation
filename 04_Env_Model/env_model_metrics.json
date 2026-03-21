@@ -1,0 +1,148 @@
+{
+  "model_a_r2": 0.5963817268199849,
+  "model_a_rmse": 1.194937381152182,
+  "model_b_mae": 0.5308882531032824,
+  "monotonicity": 1.0,
+  "sigma_scale": 1.625635687508082,
+  "calibration_raw": [
+    {
+      "tau": 0.05,
+      "actual": 0.15920688595142946,
+      "gap": 0.10920688595142945
+    },
+    {
+      "tau": 0.1,
+      "actual": 0.21706117430064556,
+      "gap": 0.11706117430064555
+    },
+    {
+      "tau": 0.25,
+      "actual": 0.3379956962803566,
+      "gap": 0.08799569628035658
+    },
+    {
+      "tau": 0.5,
+      "actual": 0.4924377497694436,
+      "gap": -0.0075622502305564
+    },
+    {
+      "tau": 0.75,
+      "actual": 0.6521979711035967,
+      "gap": -0.09780202889640333
+    },
+    {
+      "tau": 0.9,
+      "actual": 0.7865662465416539,
+      "gap": -0.11343375345834616
+    },
+    {
+      "tau": 0.95,
+      "actual": 0.8508761143559791,
+      "gap": -0.09912388564402086
+    }
+  ],
+  "calibration_scaled": [
+    {
+      "tau": 0.05,
+      "actual": 0.06028281586228097,
+      "gap": 0.01028281586228097
+    },
+    {
+      "tau": 0.1,
+      "actual": 0.10467260989855517,
+      "gap": 0.004672609898555169
+    },
+    {
+      "tau": 0.25,
+      "actual": 0.24989240700891485,
+      "gap": -0.00010759299108514808
+    },
+    {
+      "tau": 0.5,
+      "actual": 0.4924377497694436,
+      "gap": -0.0075622502305564
+    },
+    {
+      "tau": 0.75,
+      "actual": 0.7471872118044882,
+      "gap": -0.002812788195511784
+    },
+    {
+      "tau": 0.9,
+      "actual": 0.9073163233937903,
+      "gap": 0.007316323393790292
+    },
+    {
+      "tau": 0.95,
+      "actual": 0.9535813095604058,
+      "gap": 0.00358130956040581
+    }
+  ],
+  "best_params_mu": {
+    "num_leaves": 230.0,
+    "lr": 0.030221442573467035,
+    "min_child": 23.0,
+    "subsample": 0.6108347591235387,
+    "colsample": 0.5063411550008627,
+    "reg_alpha": 0.1509744636259851,
+    "reg_lambda": 0.05901360501182105
+  },
+  "best_params_sigma": {
+    "num_leaves": 126.0,
+    "lr": 0.030796979474535073,
+    "min_child": 32.0,
+    "subsample": 0.6429364783095233,
+    "colsample": 0.6491478873710773,
+    "reg_alpha": 0.7714699015070078,
+    "reg_lambda": 0.12953423681009016
+  },
+  "best_round_mu": 1334,
+  "n_obs": 222023,
+  "n_obs_train": 189493,
+  "n_obs_test": 32530,
+  "n_actions": 27,
+  "n_features": 36,
+  "feature_cols": [
+    "action_crop",
+    "input_intensity",
+    "plot_area_GPS",
+    "intercropped",
+    "plot_owned",
+    "irrigated",
+    "rainfall_growing_sum_final",
+    "rainfall_10yr_mean_final",
+    "rainfall_10yr_cv_final",
+    "ndvi_preseason_mean_final",
+    "ndvi_growing_mean_final",
+    "era5_tmean_growing_final",
+    "era5_tmax_growing_final",
+    "clay_0-5cm",
+    "sand_0-5cm",
+    "soc_0-5cm",
+    "nitrogen_0-5cm",
+    "phh2o_0-5cm",
+    "elevation_m",
+    "slope_deg",
+    "hh_size",
+    "hh_asset_index",
+    "hh_dependency_ratio",
+    "age_manager",
+    "female_manager",
+    "formal_education_manager",
+    "livestock",
+    "nonfarm_enterprise",
+    "hh_electricity_access",
+    "travel_time_city_min",
+    "urban",
+    "conflict_events_25km_12m",
+    "conflict_nearest_event_km",
+    "country",
+    "year",
+    "season"
+  ],
+  "cat_features": [
+    "action_crop",
+    "country",
+    "season"
+  ]
+}

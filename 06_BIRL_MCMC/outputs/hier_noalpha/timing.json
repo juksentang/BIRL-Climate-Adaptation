@@ -1,0 +1,10 @@
+{
+  "variant": "hier_noalpha",
+  "per_step": 6.942696523666382,
+  "elapsed_s": 1735.6741309165955,
+  "sample_div_count": 0,
+  "sample_div_total": 50,
+  "sample_div_rate": 0.0,
+  "n_warmup_timing": 200,
+  "n_sample_timing": 50
+}
