@@ -10,6 +10,7 @@ Bayesian Inverse Reinforcement Learning for Smallholder Agricultural Decision-Ma
 ## Directory Structure
 
 ```
+
 Formal Analysis/
 ├── README.md
 │
@@ -128,3 +129,6 @@ Prerequisites: Step 04 models + Step 06 posterior + CMIP6 data (via GEE).
 - **ACLED**: Armed Conflict Location & Event Data (1997–2025)
 - **Nelson**: Accessibility to cities travel time (2015, via GEE)
 - **CMIP6**: NASA/GDDP-CMIP6 downscaled projections (0.25°, 2040–2060, via GEE)
+
+## Contributors
+
