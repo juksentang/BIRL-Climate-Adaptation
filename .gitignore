@@ -75,3 +75,6 @@ _archived_plots/
 
 # local toy outputs of the Step 07 choice counterfactual
 07_2050_Counter_Fact/results/choice_cf_toy/
+
+# tracked: country-level posterior of the choice model (no household data); the counterfactual input
+!08_BIRL_v2/outputs/semipar/posterior.npz

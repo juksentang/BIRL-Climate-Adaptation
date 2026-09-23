@@ -1,4 +1,7 @@
-# Step 6: 2050 Climate Counterfactual Analysis — Complete Implementation Plan
+# Step 7: 2050 Climate Counterfactual Analysis — Complete Implementation Plan
+
+> **Superseded (2026-09).** This document describes the Stone-Geary / CRRA stage used in paper v1.1. Its results were superseded by the Step 08 choice model; the current design is in `docs/08_birl_v2/STATUS_2026-09-20.md` and `07_2050_Counter_Fact/CHOICE_CF_SPEC.md`.
+
 
 **前置条件**: MCMC后验已完成 (hier_noalpha + R3, 0% divergence, all diagnostics PASS)
 **目标**: 量化2050年气候变化下的福利损失，并比较保险vs安全网的政策价值

@@ -1,5 +1,8 @@
 # Step 7: 2050 Climate Counterfactual Analysis — Build Documentation
 
+> **Superseded (2026-09).** This document describes the Stone-Geary / CRRA stage used in paper v1.1. Its results were superseded by the Step 08 choice model; the current design is in `docs/08_birl_v2/STATUS_2026-09-20.md` and `07_2050_Counter_Fact/CHOICE_CF_SPEC.md`.
+
+
 **方法**: Delta Method + LightGBM环境模型 + Stone-Geary CRRA效用 + 后验不确定性传播
 **运行环境**: Local (Python 3.12, NumPy/LightGBM/scikit-learn)
 **总计算时间**: ~23分钟 (Stage 1: 30s, Stage 2: 2min, Stage 3: 20min, Stage 4: 30s)

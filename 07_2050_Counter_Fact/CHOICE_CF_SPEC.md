@@ -19,6 +19,7 @@ V_ia = a_c μ_ia + b_c σ_ia + c_c σ²_ia
 U_ia = V_ia + ASC_{c,a} (ASC of action 0 is 0); infeasible actions get −1e10
 P(a|i) = softmax over feasible actions of U_ia
 Do NOT centre V here (centring cancels in P but not in the logsum).
+Note (2026-09-23): the estimation script (`run_semipar.py`) centres V over the feasible set before adding the ASCs (`center_reward`). Choice probabilities are identical either way; the logsum level is not pinned by the likelihood, so the logsum-based compensating variation is defined relative to this per-observation convention (differences between scenarios are what is reported).
 
 ## Scenarios
 
