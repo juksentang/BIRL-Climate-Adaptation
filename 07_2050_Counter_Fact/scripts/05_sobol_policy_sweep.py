@@ -39,6 +39,7 @@ parser.add_argument("--K", type=int, default=200, help="posterior draws for the 
 parser.add_argument("--posterior", default=None)
 parser.add_argument("--out", default=None)
 parser.add_argument("--n-boot", type=int, default=200, dest="n_boot")
+parser.add_argument("--figures-only", action="store_true", dest="figures_only", help="only draw figures from an existing results dir (local, needs matplotlib)")
 args = parser.parse_args()
 
 os.environ.setdefault("BIRL_HOST_DEVICES", "1")
@@ -55,6 +56,42 @@ spec = importlib.util.spec_from_file_location("choice_engine", STEP07 / "src" / 
 ce = importlib.util.module_from_spec(spec); spec.loader.exec_module(ce)
 
 t_start = time.time()
+
+
+def make_figures(out_dir):
+    """Two figures from points.parquet / sobol_indices.csv / summary.json (local; needs matplotlib)."""
+    import matplotlib; matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    plt.rcParams.update({"font.size": 8, "axes.spines.top": False, "axes.spines.right": False})
+    out_dir = Path(out_dir); (out_dir / "figures").mkdir(exist_ok=True)
+    S = json.load(open(out_dir / "summary.json")); sob = pd.read_csv(out_dir / "sobol_indices.csv")
+    pts = pd.read_parquet(out_dir / "points.parquet")
+    countries_ = S["countries"]; mc = S["m_c"]; pn = S["params"]; C_ = len(countries_)
+    ordc = sorted(countries_, key=lambda c: mc[c])
+    fig, axes = plt.subplots(1, C_, figsize=(1.6 * C_ + 1, 2.6), sharey=True)
+    for ax, cname in zip(np.atleast_1d(axes), ordc):
+        t = sob[(sob.country == cname) & (sob.metric == "headline_ratio")].set_index("param").reindex(pn)
+        ax.barh(pn, t["ST"].values, xerr=[np.clip(t["ST"] - t["ST_lo"], 0, None), np.clip(t["ST_hi"] - t["ST"], 0, None)],
+                color="#4C7A3F", alpha=0.85, error_kw=dict(lw=0.6))
+        ax.set_title(f"{cname}\n({mc[cname]:.0f} USD)", fontsize=8); ax.set_xlim(0, max(1.0, float(np.nanmax(t["ST_hi"])) * 1.05))
+    np.atleast_1d(axes)[0].set_ylabel("policy parameter")
+    fig.suptitle("Total Sobol index of the headline ratio (contraction / transfer switching)", fontsize=9)
+    fig.tight_layout(); fig.savefig(out_dir / "figures" / "fig_sobol_ST_headline.pdf"); plt.close(fig)
+    hr = pts[pts.metric == "headline_ratio"]
+    dat = [hr[hr.country == c].value.values for c in ordc]; dat = [d[np.isfinite(d)] for d in dat]
+    fig, ax = plt.subplots(figsize=(5.2, 3.0))
+    ax.violinplot(dat, showmedians=True); ax.axhline(1, color="grey", lw=0.8, ls="--")
+    ax.set_xticks(range(1, C_ + 1)); ax.set_xticklabels([f"{c}\n({mc[c]:.0f})" for c in ordc])
+    ax.set_yscale("log"); ax.set_ylabel("headline ratio over the parameter box")
+    ax.set_title(f"{S['climate']}: {S['n_eval']} Saltelli points, posterior-median parameters", fontsize=9)
+    fig.tight_layout(); fig.savefig(out_dir / "figures" / "fig_headline_ratio_box.pdf"); plt.close(fig)
+    return out_dir / "figures"
+
+
+if args.figures_only:
+    fdir = make_figures(Path(args.out) if args.out else STEP07 / "results" / "choice_cf_sobol")
+    print(f"[sobol] figures -> {fdir}"); sys.exit(0)
+
 def say(msg):
     print(f"[sobol {time.strftime('%H:%M:%S')}] {msg}", flush=True)
 
@@ -279,23 +316,9 @@ summary = {"toy": args.toy, "climate": args.climate, "n_base": args.n_base, "D":
 json.dump(summary, open(out_dir / "summary.json", "w"), indent=2, default=float)
 
 # ─────────────────────────────────────────────────────────────── figures ──
-import matplotlib; matplotlib.use("Agg")                                    # noqa: E402
-import matplotlib.pyplot as plt                                             # noqa: E402
-plt.rcParams.update({"font.size": 8, "axes.spines.top": False, "axes.spines.right": False})
-ordc = [countries[i] for i in order_m]
-fig, axes = plt.subplots(1, C, figsize=(1.6 * C + 1, 2.6), sharey=True)
-for ax, cname in zip(np.atleast_1d(axes), ordc):
-    s = sob[(sob.country == cname) & (sob.metric == "headline_ratio")].set_index("param").reindex(PNAMES)
-    ax.barh(PNAMES, s["ST"].values, xerr=[np.clip(s["ST"] - s["ST_lo"], 0, None), np.clip(s["ST_hi"] - s["ST"], 0, None)],
-            color="#4C7A3F", alpha=0.85, error_kw=dict(lw=0.6))
-    ax.set_title(f"{cname}\n({m_c[countries.index(cname)]:.0f} USD)", fontsize=8); ax.set_xlim(0, 1)
-np.atleast_1d(axes)[0].set_ylabel("policy parameter"); fig.suptitle("Total Sobol index of the headline ratio (contraction / transfer switching)", fontsize=9)
-fig.tight_layout(); fig.savefig(out_dir / "figures" / "fig_sobol_ST_headline.pdf"); plt.close(fig)
-fig, ax = plt.subplots(figsize=(5.2, 3.0))
-dat = [AB_all[:, countries.index(c)] for c in ordc]; dat = [d[np.isfinite(d)] for d in dat]
-ax.violinplot(dat, showmedians=True); ax.axhline(1, color="grey", lw=0.8, ls="--")
-ax.set_xticks(range(1, C + 1)); ax.set_xticklabels([f"{c}\n({m_c[countries.index(c)]:.0f})" for c in ordc])
-ax.set_yscale("log"); ax.set_ylabel("headline ratio over the parameter box"); ax.set_title(f"{args.climate}: {n_eval} Saltelli points, posterior-median parameters", fontsize=9)
-fig.tight_layout(); fig.savefig(out_dir / "figures" / "fig_headline_ratio_box.pdf"); plt.close(fig)
+try:
+    fdir = make_figures(out_dir); say(f"figures -> {fdir}")
+except ModuleNotFoundError as e:
+    say(f"figures skipped ({e}); run locally with --figures-only --out {out_dir}")
 say(f"rank share (Spearman>=0.8): {share_rank:.3f}; low4>1 & Mali<1: {share_pattern:.3f}; SN better per resource $: { {k: round(v,2) for k,v in share_sn.items()} }")
 say(f"wrote {out_dir}; total {time.time()-t_start:.0f}s")
