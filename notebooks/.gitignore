@@ -1,0 +1,3 @@
+figures_tier0/
+__pycache__/
+*.sbatch.out
