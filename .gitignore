@@ -72,3 +72,6 @@ _archived_plots/
 *.npy
 # cluster user / allocation: copy env.example.sh -> env.sh and fill in
 08_BIRL_v2/slurm/env.sh
+
+# local toy outputs of the Step 07 choice counterfactual
+07_2050_Counter_Fact/results/choice_cf_toy/

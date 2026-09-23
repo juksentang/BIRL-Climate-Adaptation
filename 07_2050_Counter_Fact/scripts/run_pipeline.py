@@ -9,7 +9,8 @@ Usage:
 Stage 0: Export GPS points (prerequisite for GEE)
 Stage 1: Process CMIP6 climate data
 Stage 2: Generate counterfactual matrices
-Stage 3: Compute welfare (CE) for all scenarios
+Stage 3: Choice-model counterfactual and welfare (Step 08 model)
+Stage 4: Tables and figures
 """
 
 import argparse
@@ -24,8 +25,9 @@ STAGES = {
     0: ("00_export_gps_points.py", "Export GPS points for GEE"),
     1: ("01_process_climate.py", "Process CMIP6 climate data"),
     2: ("02_generate_cf_matrices.py", "Generate counterfactual matrices"),
-    3: ("03_compute_welfare.py", "Compute CE for all scenarios"),
-    # Stage 4 (04_make_figures.py) archived to _archived_plots/
+    3: ("03_choice_counterfactual.py", "Choice-model counterfactual and welfare (Step 08 model)"),
+    4: ("04_report_choice_cf.py", "Tables and figures from results/choice_cf"),
+    # v1 (Stone-Geary CE on the Step 06 posterior): 03_compute_welfare_v1.py, kept for paper v1.1
 }
 
 

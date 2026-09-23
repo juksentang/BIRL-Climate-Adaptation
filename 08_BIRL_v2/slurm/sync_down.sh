@@ -15,4 +15,11 @@ rsync -av ${DRY} -e "ssh -o BatchMode=yes" \
       --exclude '.jax_cache/' --exclude 'mcmc_state.pkl' --exclude 'samples_partial.npz' \
       --exclude '*.tmp' \
       "${SSH_HOST}:${REMOTE_PKG}/outputs/" "${LOCAL_PKG}/outputs/"
+
+# ── Step 07 choice-counterfactual results ──
+LOCAL_07=$(cd "${LOCAL_PKG}/../07_2050_Counter_Fact" && pwd)
+REMOTE_07="${REMOTE_ROOT}/07_2050_Counter_Fact"
+mkdir -p "${LOCAL_07}/results/choice_cf"
+echo ">> ${SSH_HOST}:${REMOTE_07}/results/choice_cf/ -> ${LOCAL_07}/results/choice_cf/"
+rsync -av ${DRY} -e "ssh -o BatchMode=yes" "${SSH_HOST}:${REMOTE_07}/results/choice_cf/" "${LOCAL_07}/results/choice_cf/" || echo ">> (no choice_cf results on the cluster yet)"
 echo ">> sync_down done: $(du -sh "${LOCAL_PKG}/outputs" | cut -f1) in ${LOCAL_PKG}/outputs"
