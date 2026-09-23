@@ -166,8 +166,12 @@ piv = sw.pivot_table(index=["country", "draw"], columns="policy", values="value"
 ratio = (piv["contraction"] / piv["transfer"]).groupby("country")
 order = list(pd.Series(inp["m_c"], index=inp["countries"]).sort_values().index)
 head = pd.DataFrame({"ratio_median": ratio.median(), "q05": ratio.quantile(0.055), "q95": ratio.quantile(0.945)}).reindex(order).round(2)
-tracked = pd.read_csv(ROOT / "07_2050_Counter_Fact" / "results" / "choice_cf" / "tables" / "headline_ratio.csv")
-head["tracked (K=200 NUTS)"] = tracked[tracked.climate == "ssp585"].set_index("country")["ratio_median"].reindex(order).round(2)
+_tracked_path = ROOT / "07_2050_Counter_Fact" / "results" / "choice_cf" / "tables" / "headline_ratio.csv"
+if _tracked_path.exists():   # tracked in the repository; absent only on a partial sync
+    tracked = pd.read_csv(_tracked_path)
+    head["tracked (K=200 NUTS)"] = tracked[tracked.climate == "ssp585"].set_index("country")["ratio_median"].reindex(order).round(2)
+else:
+    print("tracked headline_ratio.csv not found next to this checkout; showing this run only")
 display(head)
 
 # %%

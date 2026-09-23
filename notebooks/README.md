@@ -13,10 +13,10 @@ NVIDIA H100 MIG slice (1g.10gb, 1/7 of a GPU), job of 2026-09-23:
 
 | step | time |
 |---|---|
-| data load (222,023 × 27) | TIER1_LOAD |
-| SVI, 6000 steps | TIER1_SVI |
-| counterfactual, 2 climates × 6 policies × 50 draws | TIER1_CF |
-| whole script | TIER1_WALL |
+| data load (222,023 × 27) | 5 s |
+| SVI, 6000 steps | 31 s |
+| counterfactual, 2 climates × 6 policies × 50 draws | 6 s |
+| whole script | about 1 min (one H100 MIG 1g.10gb slice; a Colab T4 is comparable, 4 CPU cores roughly 15-30 min) |
 
 A Colab T4 is comparable to the slice; on 4 CPU cores expect roughly 15–30 min for the SVI and skip NUTS.
 
@@ -28,7 +28,14 @@ A Colab T4 is comparable to the slice; on 4 CPU cores expect roughly 15–30 min
 * Section 4: the switching ratio "variance cut / income transfer" per country next
   to `07_2050_Counter_Fact/results/choice_cf/tables/headline_ratio.csv`.
 
-TIER1_TABLE
+| Country | a (SVI) | b (SVI) | c (SVI) | a (NUTS) | b (NUTS) | c (NUTS) |
+|---|---|---|---|---|---|---|
+| Ethiopia | 0.41 | -5.42 | 2.46 | 0.41 | -5.42 | 2.47 |
+| Malawi | -0.62 | -6.30 | 2.40 | -0.63 | -6.30 | 2.40 |
+| Mali | 1.35 | -9.13 | 4.06 | 1.34 | -9.11 | 4.06 |
+| Nigeria | 1.71 | -9.00 | 3.85 | 1.71 | -9.00 | 3.86 |
+| Tanzania | -0.10 | -10.80 | 4.40 | -0.09 | -10.81 | 4.40 |
+| Uganda | 0.88 | -11.13 | 5.18 | 0.91 | -11.13 | 5.18 |
 
 ## Colab
 
