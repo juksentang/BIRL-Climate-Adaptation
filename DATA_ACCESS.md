@@ -102,3 +102,15 @@ The following files contain no individual-level data and can be shared openly:
 6. Run Step 07 stages 1-5 (`07_2050_Counter_Fact/README.md`)
 
 Tier 1 of the root README needs only the two derived files above plus the tracked posterior.
+
+## Statistical disclosure control for tracked outputs
+
+The repository tracks aggregates only: country-level and country x action or
+country x asset-tercile summaries, posterior draws of country-level parameters
+(`08_BIRL_v2/outputs/semipar/posterior.npz`: 180 parameters per draw, not
+invertible to any observation), ELBO traces, and scenario tables. No
+per-plot or per-household file is tracked (`*.parquet`, `*.pkl`, `*.npy` and
+the GPS point export are ignored). Count cells below 10 observations are
+suppressed. `python3 tools/disclosure_scan.py` checks every tracked file for
+identifier fields, per-observation sizes and small count cells; run it before
+committing new results.

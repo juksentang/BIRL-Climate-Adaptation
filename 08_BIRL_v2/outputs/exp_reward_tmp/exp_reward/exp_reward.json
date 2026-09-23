@@ -307,7 +307,7 @@
       648,
       646,
       0,
-      7,
+      -1,
       0
     ],
     [
@@ -694,5 +694,6 @@
         1.131329551824147
       ]
     }
-  }
+  },
+  "n_cell_note": "cells with fewer than 10 observations are suppressed (-1) for statistical disclosure control"
 }
