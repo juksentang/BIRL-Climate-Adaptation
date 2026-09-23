@@ -1,6 +1,6 @@
 ## Acknowledgments
 
-Cloud computing resources were provided by the Google Cloud TPU Research Cloud (TRC) program. Geospatial data extraction was supported by the Google Earth Engine (GEE) academic research quota.
+Cloud computing resources were provided by the Google Cloud TPU Research Cloud (TRC) program (Steps 05-06). The Step 08 re-estimation was enabled in part by support provided by Calcul Québec (calculquebec.ca) and the Digital Research Alliance of Canada (alliancecan.ca), on the Rorqual cluster. Geospatial data extraction was supported by the Google Earth Engine (GEE) academic research quota.
 
 # BIRL Formal Analysis Pipeline
 
@@ -144,6 +144,16 @@ See `08_BIRL_v2/README.md` and `08_BIRL_v2/slurm/README.md`. Experiments (`slurm
 - **ACLED**: Armed Conflict Location & Event Data (1997–2025)
 - **Nelson**: Accessibility to cities travel time (2015, via GEE)
 - **CMIP6**: NASA/GDDP-CMIP6 downscaled projections (0.25°, 2040–2060, via GEE)
+
+## Changelog
+
+### 2026-09 — Step 08: re-estimation and repositioning
+
+- **Why.** Diagnostics on the paper v1.1 results (Step 06, `hier_noalpha`) showed that the country-level γ estimates sat at an upper bound derived from the pooled per-plot income median, that the un-scaled reward let ρ absorb choice noise (β = 0.14), and that the 31K household-level parameters were not identified. The policy ranking (safety nets vs. insurance) inherited these artefacts.
+- **What was done.** New Step 08 (`08_BIRL_v2/`): country-level model, share-parameterised γ, CE-scaled reward, one-hot parameter broadcasting (a gather-transpose scatter had made gradients 300x slower), chunked NUTS with checkpoint/resume, simulation-recovery test, 96 unit tests, and a Rorqual (H100) SLURM package. Runs take minutes instead of hours.
+- **What was found.** Within the CRRA / Stone-Geary family, ρ and γ are not identified from crop choice (ρ at its bounds in every country). The environment model shows no leakage on held-out households, and its σ is not a familiarity proxy. Choices load on the predicted 10th percentile 2 to 14x more than on the 90th; no classical utility family fits. A semi-parametric choice model V = a·μ + b·σ + c·σ² with crop fixed effects is identified: dispersion aversion is uniform across countries, level sensitivity rises with income.
+- **Consequences.** Step 06 is kept only to reproduce paper v1.1. Step 07's welfare stage still consumes the Step 06 posterior and is being rewritten against the Step 08 model (policies as shifts of the income distribution; calibrated ρ for welfare). Full account for collaborators: `docs/08_birl_v2/STATUS_2026-09-20.md`.
+- **Repository.** Only small summaries under `08_BIRL_v2/outputs/` are tracked; cluster user and allocation live in an untracked `slurm/env.sh` (template `env.example.sh`), and `slurm/sb.sh` supplies `--account`/`--output` at submission.
 
 ## Contributors
 
