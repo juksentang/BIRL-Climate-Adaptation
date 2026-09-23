@@ -1,0 +1,616 @@
+{
+  "toy": false,
+  "climate": "ssp585",
+  "n_base": 128,
+  "D": 8,
+  "params": [
+    "t",
+    "lam",
+    "f",
+    "f_both",
+    "trigger",
+    "basis",
+    "loading",
+    "theta"
+  ],
+  "box": {
+    "t": [
+      0.02,
+      0.3
+    ],
+    "lam": [
+      0.1,
+      0.9
+    ],
+    "f": [
+      0.2,
+      0.8
+    ],
+    "f_both": [
+      0.1,
+      0.5
+    ],
+    "trigger": [
+      0.3,
+      0.8
+    ],
+    "basis": [
+      0.0,
+      0.5
+    ],
+    "loading": [
+      0.0,
+      0.5
+    ],
+    "theta": [
+      0.2,
+      0.5
+    ]
+  },
+  "n_eval": 1280,
+  "elapsed_s": 53.6,
+  "K_base": 200,
+  "countries": [
+    "Ethiopia",
+    "Malawi",
+    "Mali",
+    "Nigeria",
+    "Tanzania",
+    "Uganda"
+  ],
+  "m_c": {
+    "Ethiopia": 19.856468200683594,
+    "Malawi": 19.123497009277344,
+    "Mali": 129.95687866210938,
+    "Nigeria": 102.73678588867188,
+    "Tanzania": 26.026512145996094,
+    "Uganda": 25.459810256958008
+  },
+  "share_points_rank_spearman_ge_0.8": 0.0125,
+  "spearman_median": 0.4285714285714286,
+  "share_points_low4_gt1_and_mali_lt1": 0.75546875,
+  "share_points_safety_net_better_per_resource_dollar": {
+    "Ethiopia": 0.659375,
+    "Malawi": 0.625,
+    "Mali": 0.5875,
+    "Nigeria": 0.6265625,
+    "Tanzania": 0.59140625,
+    "Uganda": 0.83828125
+  },
+  "top2_total_sobol": {
+    "headline_ratio": {
+      "Ethiopia": [
+        [
+          "t",
+          1.07
+        ],
+        [
+          "lam",
+          0.136
+        ]
+      ],
+      "Malawi": [
+        [
+          "t",
+          0.995
+        ],
+        [
+          "lam",
+          0.159
+        ]
+      ],
+      "Mali": [
+        [
+          "t",
+          1.161
+        ],
+        [
+          "lam",
+          0.087
+        ]
+      ],
+      "Nigeria": [
+        [
+          "t",
+          1.084
+        ],
+        [
+          "lam",
+          0.152
+        ]
+      ],
+      "Tanzania": [
+        [
+          "t",
+          0.977
+        ],
+        [
+          "lam",
+          0.184
+        ]
+      ],
+      "Uganda": [
+        [
+          "t",
+          1.076
+        ],
+        [
+          "lam",
+          0.156
+        ]
+      ]
+    },
+    "switch_safety_net": {
+      "Ethiopia": [
+        [
+          "f",
+          0.998
+        ],
+        [
+          "t",
+          0.0
+        ]
+      ],
+      "Malawi": [
+        [
+          "f",
+          0.998
+        ],
+        [
+          "t",
+          0.0
+        ]
+      ],
+      "Mali": [
+        [
+          "f",
+          0.998
+        ],
+        [
+          "t",
+          0.0
+        ]
+      ],
+      "Nigeria": [
+        [
+          "f",
+          0.998
+        ],
+        [
+          "t",
+          0.0
+        ]
+      ],
+      "Tanzania": [
+        [
+          "f",
+          0.997
+        ],
+        [
+          "t",
+          0.0
+        ]
+      ],
+      "Uganda": [
+        [
+          "f",
+          0.996
+        ],
+        [
+          "t",
+          0.0
+        ]
+      ]
+    },
+    "switch_insurance": {
+      "Ethiopia": [
+        [
+          "trigger",
+          0.609
+        ],
+        [
+          "basis",
+          0.367
+        ]
+      ],
+      "Malawi": [
+        [
+          "trigger",
+          0.559
+        ],
+        [
+          "basis",
+          0.433
+        ]
+      ],
+      "Mali": [
+        [
+          "trigger",
+          0.625
+        ],
+        [
+          "basis",
+          0.366
+        ]
+      ],
+      "Nigeria": [
+        [
+          "trigger",
+          0.693
+        ],
+        [
+          "basis",
+          0.287
+        ]
+      ],
+      "Tanzania": [
+        [
+          "trigger",
+          0.716
+        ],
+        [
+          "basis",
+          0.268
+        ]
+      ],
+      "Uganda": [
+        [
+          "trigger",
+          0.825
+        ],
+        [
+          "loading",
+          0.094
+        ]
+      ]
+    },
+    "pdr_safety_net": {
+      "Ethiopia": [
+        [
+          "f",
+          0.801
+        ],
+        [
+          "theta",
+          0.644
+        ]
+      ],
+      "Malawi": [
+        [
+          "f",
+          0.771
+        ],
+        [
+          "theta",
+          0.665
+        ]
+      ],
+      "Mali": [
+        [
+          "f",
+          0.813
+        ],
+        [
+          "theta",
+          0.652
+        ]
+      ],
+      "Nigeria": [
+        [
+          "f",
+          0.818
+        ],
+        [
+          "theta",
+          0.652
+        ]
+      ],
+      "Tanzania": [
+        [
+          "f",
+          0.755
+        ],
+        [
+          "theta",
+          0.665
+        ]
+      ],
+      "Uganda": [
+        [
+          "f",
+          0.788
+        ],
+        [
+          "theta",
+          0.653
+        ]
+      ]
+    },
+    "pdr_insurance": {
+      "Ethiopia": [
+        [
+          "theta",
+          0.621
+        ],
+        [
+          "trigger",
+          0.579
+        ]
+      ],
+      "Malawi": [
+        [
+          "trigger",
+          0.575
+        ],
+        [
+          "theta",
+          0.533
+        ]
+      ],
+      "Mali": [
+        [
+          "trigger",
+          0.608
+        ],
+        [
+          "theta",
+          0.488
+        ]
+      ],
+      "Nigeria": [
+        [
+          "trigger",
+          0.608
+        ],
+        [
+          "theta",
+          0.523
+        ]
+      ],
+      "Tanzania": [
+        [
+          "trigger",
+          0.606
+        ],
+        [
+          "theta",
+          0.52
+        ]
+      ],
+      "Uganda": [
+        [
+          "theta",
+          0.742
+        ],
+        [
+          "trigger",
+          0.481
+        ]
+      ]
+    },
+    "d_pbelow_safety_net": {
+      "Ethiopia": [
+        [
+          "f",
+          1.009
+        ],
+        [
+          "theta",
+          0.371
+        ]
+      ],
+      "Malawi": [
+        [
+          "f",
+          1.033
+        ],
+        [
+          "theta",
+          0.37
+        ]
+      ],
+      "Mali": [
+        [
+          "f",
+          1.031
+        ],
+        [
+          "theta",
+          0.38
+        ]
+      ],
+      "Nigeria": [
+        [
+          "f",
+          1.028
+        ],
+        [
+          "theta",
+          0.374
+        ]
+      ],
+      "Tanzania": [
+        [
+          "f",
+          1.036
+        ],
+        [
+          "theta",
+          0.373
+        ]
+      ],
+      "Uganda": [
+        [
+          "f",
+          0.99
+        ],
+        [
+          "theta",
+          0.364
+        ]
+      ]
+    },
+    "d_pbelow_insurance": {
+      "Ethiopia": [
+        [
+          "trigger",
+          0.624
+        ],
+        [
+          "theta",
+          0.522
+        ]
+      ],
+      "Malawi": [
+        [
+          "trigger",
+          0.661
+        ],
+        [
+          "theta",
+          0.442
+        ]
+      ],
+      "Mali": [
+        [
+          "trigger",
+          0.663
+        ],
+        [
+          "theta",
+          0.469
+        ]
+      ],
+      "Nigeria": [
+        [
+          "trigger",
+          0.662
+        ],
+        [
+          "theta",
+          0.471
+        ]
+      ],
+      "Tanzania": [
+        [
+          "trigger",
+          0.708
+        ],
+        [
+          "theta",
+          0.434
+        ]
+      ],
+      "Uganda": [
+        [
+          "theta",
+          0.652
+        ],
+        [
+          "trigger",
+          0.566
+        ]
+      ]
+    }
+  },
+  "headline_uncertainty": {
+    "Ethiopia": {
+      "posterior_median": 1.9766085147857666,
+      "posterior_hpdi89": [
+        1.9506027698516846,
+        1.9984997510910034
+      ],
+      "posterior_hpdi_width": 0.04789698123931885,
+      "param_box_median": 1.304297924041748,
+      "param_box_iqr": 0.8149850368499756,
+      "param_box_q05_q95": [
+        0.7499502897262573,
+        4.415647983551025
+      ],
+      "share_points_ratio_gt1": 0.8484375
+    },
+    "Malawi": {
+      "posterior_median": 1.9674652814865112,
+      "posterior_hpdi89": [
+        1.877659559249878,
+        2.0732314586639404
+      ],
+      "posterior_hpdi_width": 0.1955718994140625,
+      "param_box_median": 1.306014060974121,
+      "param_box_iqr": 0.9553780555725098,
+      "param_box_q05_q95": [
+        0.7052295804023743,
+        4.8684611320495605
+      ],
+      "share_points_ratio_gt1": 0.77265625
+    },
+    "Mali": {
+      "posterior_median": 0.3323863744735718,
+      "posterior_hpdi89": [
+        0.3071668744087219,
+        0.37605366110801697
+      ],
+      "posterior_hpdi_width": 0.06888678669929504,
+      "param_box_median": 0.21353517472743988,
+      "param_box_iqr": 0.14028653502464294,
+      "param_box_q05_q95": [
+        0.13144302368164062,
+        0.638526201248169
+      ],
+      "share_points_ratio_gt1": 0.0078125
+    },
+    "Nigeria": {
+      "posterior_median": 1.1536320447921753,
+      "posterior_hpdi89": [
+        1.1275635957717896,
+        1.1807020902633667
+      ],
+      "posterior_hpdi_width": 0.05313849449157715,
+      "param_box_median": 0.7823385000228882,
+      "param_box_iqr": 0.444851279258728,
+      "param_box_q05_q95": [
+        0.4719717502593994,
+        2.260009765625
+      ],
+      "share_points_ratio_gt1": 0.3078125
+    },
+    "Tanzania": {
+      "posterior_median": 2.570085048675537,
+      "posterior_hpdi89": [
+        2.547377347946167,
+        2.5911149978637695
+      ],
+      "posterior_hpdi_width": 0.04373764991760254,
+      "param_box_median": 1.827893614768982,
+      "param_box_iqr": 1.0932120084762573,
+      "param_box_q05_q95": [
+        0.997058629989624,
+        5.315826892852783
+      ],
+      "share_points_ratio_gt1": 0.94765625
+    },
+    "Uganda": {
+      "posterior_median": 2.062376022338867,
+      "posterior_hpdi89": [
+        2.0429635047912598,
+        2.090348482131958
+      ],
+      "posterior_hpdi_width": 0.04738497734069824,
+      "param_box_median": 1.4433224201202393,
+      "param_box_iqr": 0.7497495412826538,
+      "param_box_q05_q95": [
+        0.859933614730835,
+        4.25119161605835
+      ],
+      "share_points_ratio_gt1": 0.90625
+    }
+  },
+  "posterior_median_a": {
+    "Ethiopia": 0.4101000130176544,
+    "Malawi": -0.6304000020027161,
+    "Mali": 1.3481999635696411,
+    "Nigeria": 1.7143000364303589,
+    "Tanzania": -0.10700000077486038,
+    "Uganda": 0.9047999978065491
+  }
+}

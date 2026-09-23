@@ -42,6 +42,20 @@ FILES=()
 for f in ${DATA_FILES}; do FILES+=("${LOCAL_DATA}/${f}"); done
 rsync -av ${DRY} -e "ssh -o BatchMode=yes" "${FILES[@]}" "${SSH_HOST}:${REMOTE_DATA}/"
 
+
+# ── Step 07 (choice counterfactual): code + the two 2050 quantile matrices ──
+LOCAL_07=$(cd "${LOCAL_PKG}/../07_2050_Counter_Fact" && pwd)
+REMOTE_07="${REMOTE_ROOT}/07_2050_Counter_Fact"
+echo ">> 07 code: ${LOCAL_07}/{src,scripts} -> ${SSH_HOST}:${REMOTE_07}/"
+ssh -o BatchMode=yes "${SSH_HOST}" "mkdir -p '${REMOTE_07}/data' '${REMOTE_07}/results'"
+rsync -av ${DRY} --delete -e "ssh -o BatchMode=yes" --exclude '__pycache__/' --exclude '*.pyc' \
+      "${LOCAL_07}/src" "${LOCAL_07}/scripts" "${LOCAL_07}/CHOICE_CF_SPEC.md" "${SSH_HOST}:${REMOTE_07}/"
+for f in ssp245_cf.npz ssp585_cf.npz; do
+    [ -f "${LOCAL_07}/data/${f}" ] || { echo "missing ${LOCAL_07}/data/${f} (run 07 stage 2 first)"; exit 1; }
+done
+echo ">> 07 data: ssp245_cf.npz ssp585_cf.npz -> ${SSH_HOST}:${REMOTE_07}/data/"
+rsync -av ${DRY} -e "ssh -o BatchMode=yes" "${LOCAL_07}/data/ssp245_cf.npz" "${LOCAL_07}/data/ssp585_cf.npz" "${SSH_HOST}:${REMOTE_07}/data/"
+
 echo ">> chmod +x slurm/*.sh"
 ssh -o BatchMode=yes "${SSH_HOST}" "chmod +x ${REMOTE_PKG}/slurm/*.sh; ls -la ${REMOTE_DATA}"
 echo ">> sync_up done"
