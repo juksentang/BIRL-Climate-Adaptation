@@ -1,0 +1,66 @@
+semipar_assets: 4 x (1000+1000) dense=False; N=222023 (dropped 0); G=18
+Divergences: 0/4000 (0.0000)  [PASS]
+R-hat max (a,b,c): 1.0036   ESS bulk min: 1977   ASC r_hat max 1.0047, ess min 661
+
+  a[Ethiopia  T1_poor  n= 24825]   +0.358 [  +0.336,   +0.380]  r_hat=1.000 ess=3250
+  a[Ethiopia  T2_mid   n= 21725]   +0.401 [  +0.378,   +0.427]  r_hat=1.001 ess=3019
+  a[Ethiopia  T3_rich  n= 23268]   +0.514 [  +0.489,   +0.541]  r_hat=1.000 ess=3366
+  a[Malawi    T1_poor  n=  5844]   -1.065 [  -1.188,   -0.961]  r_hat=1.001 ess=2750
+  a[Malawi    T2_mid   n=  5806]   -0.818 [  -0.930,   -0.705]  r_hat=1.001 ess=2543
+  a[Malawi    T3_rich  n=  5792]   -0.090 [  -0.190,   +0.009]  r_hat=1.000 ess=2421
+  a[Mali      T1_poor  n=  5098]   +0.982 [  +0.904,   +1.074]  r_hat=1.000 ess=3409
+  a[Mali      T2_mid   n=  5104]   +1.399 [  +1.314,   +1.483]  r_hat=1.000 ess=2929
+  a[Mali      T3_rich  n=  5009]   +1.713 [  +1.620,   +1.799]  r_hat=1.001 ess=2936
+  a[Nigeria   T1_poor  n= 14241]   +1.067 [  +1.003,   +1.133]  r_hat=1.001 ess=3537
+  a[Nigeria   T2_mid   n= 14227]   +1.640 [  +1.575,   +1.705]  r_hat=1.001 ess=2909
+  a[Nigeria   T3_rich  n= 14229]   +2.107 [  +2.046,   +2.167]  r_hat=1.000 ess=4199
+  a[Tanzania  T1_poor  n=  4785]   -0.317 [  -0.453,   -0.192]  r_hat=1.000 ess=2110
+  a[Tanzania  T2_mid   n=  4762]   +0.028 [  -0.096,   +0.159]  r_hat=1.001 ess=2193
+  a[Tanzania  T3_rich  n=  4742]   +0.016 [  -0.118,   +0.127]  r_hat=1.001 ess=1977
+  a[Uganda    T1_poor  n= 21034]   +0.698 [  +0.610,   +0.781]  r_hat=1.001 ess=5654
+  a[Uganda    T2_mid   n= 20719]   +1.001 [  +0.917,   +1.085]  r_hat=1.001 ess=6340
+  a[Uganda    T3_rich  n= 20813]   +1.003 [  +0.927,   +1.080]  r_hat=1.002 ess=5753
+  b[Ethiopia  T1_poor  n= 24825]   -5.003 [  -5.185,   -4.816]  r_hat=1.004 ess=2775
+  b[Ethiopia  T2_mid   n= 21725]   -5.769 [  -5.990,   -5.569]  r_hat=1.000 ess=3092
+  b[Ethiopia  T3_rich  n= 23268]   -5.589 [  -5.780,   -5.406]  r_hat=1.001 ess=3115
+  b[Malawi    T1_poor  n=  5844]   -7.075 [  -7.881,   -6.323]  r_hat=1.001 ess=2485
+  b[Malawi    T2_mid   n=  5806]   -6.860 [  -7.669,   -6.118]  r_hat=1.001 ess=2765
+  b[Malawi    T3_rich  n=  5792]   -4.172 [  -4.838,   -3.488]  r_hat=1.001 ess=2579
+  b[Mali      T1_poor  n=  5098]   -8.874 [  -9.537,   -8.175]  r_hat=1.001 ess=3055
+  b[Mali      T2_mid   n=  5104]   -9.756 [ -10.465,   -9.041]  r_hat=1.000 ess=3089
+  b[Mali      T3_rich  n=  5009]   -8.130 [  -8.825,   -7.493]  r_hat=1.003 ess=2660
+  b[Nigeria   T1_poor  n= 14241]  -12.989 [ -13.495,  -12.435]  r_hat=1.000 ess=2872
+  b[Nigeria   T2_mid   n= 14227]  -10.584 [ -10.998,  -10.147]  r_hat=1.000 ess=3405
+  b[Nigeria   T3_rich  n= 14229]   -4.968 [  -5.400,   -4.567]  r_hat=1.002 ess=2794
+  b[Tanzania  T1_poor  n=  4785]  -11.157 [ -11.963,  -10.263]  r_hat=1.000 ess=3078
+  b[Tanzania  T2_mid   n=  4762]   -8.740 [  -9.534,   -7.816]  r_hat=1.001 ess=3213
+  b[Tanzania  T3_rich  n=  4742]  -11.428 [ -12.192,  -10.627]  r_hat=1.000 ess=2770
+  b[Uganda    T1_poor  n= 21034]  -12.747 [ -13.268,  -12.265]  r_hat=1.003 ess=3159
+  b[Uganda    T2_mid   n= 20719]  -11.603 [ -12.172,  -11.048]  r_hat=1.000 ess=2951
+  b[Uganda    T3_rich  n= 20813]   -8.720 [  -9.222,   -8.265]  r_hat=1.000 ess=3173
+  c[Ethiopia  T1_poor  n= 24825]   +2.320 [  +2.241,   +2.393]  r_hat=1.003 ess=2801
+  c[Ethiopia  T2_mid   n= 21725]   +2.543 [  +2.456,   +2.629]  r_hat=1.001 ess=3180
+  c[Ethiopia  T3_rich  n= 23268]   +2.571 [  +2.499,   +2.652]  r_hat=1.001 ess=3158
+  c[Malawi    T1_poor  n=  5844]   +2.496 [  +2.197,   +2.789]  r_hat=1.003 ess=2565
+  c[Malawi    T2_mid   n=  5806]   +2.709 [  +2.426,   +3.024]  r_hat=1.000 ess=2766
+  c[Malawi    T3_rich  n=  5792]   +1.808 [  +1.539,   +2.054]  r_hat=1.001 ess=2539
+  c[Mali      T1_poor  n=  5098]   +3.708 [  +3.359,   +4.030]  r_hat=1.002 ess=3084
+  c[Mali      T2_mid   n=  5104]   +4.448 [  +4.081,   +4.817]  r_hat=1.000 ess=3222
+  c[Mali      T3_rich  n=  5009]   +3.823 [  +3.495,   +4.148]  r_hat=1.003 ess=2748
+  c[Nigeria   T1_poor  n= 14241]   +5.495 [  +5.279,   +5.727]  r_hat=1.000 ess=2986
+  c[Nigeria   T2_mid   n= 14227]   +4.088 [  +3.927,   +4.267]  r_hat=1.000 ess=3535
+  c[Nigeria   T3_rich  n= 14229]   +2.553 [  +2.397,   +2.717]  r_hat=1.002 ess=2809
+  c[Tanzania  T1_poor  n=  4785]   +4.544 [  +4.236,   +4.841]  r_hat=0.999 ess=2881
+  c[Tanzania  T2_mid   n=  4762]   +3.665 [  +3.356,   +3.971]  r_hat=1.001 ess=3254
+  c[Tanzania  T3_rich  n=  4742]   +4.619 [  +4.325,   +4.879]  r_hat=1.000 ess=2827
+  c[Uganda    T1_poor  n= 21034]   +5.689 [  +5.488,   +5.904]  r_hat=1.003 ess=3300
+  c[Uganda    T2_mid   n= 20719]   +5.522 [  +5.297,   +5.755]  r_hat=1.001 ess=2981
+  c[Uganda    T3_rich  n= 20813]   +4.219 [  +4.030,   +4.413]  r_hat=1.000 ess=3203
+
+poor - rich contrasts (median [89% HPDI], P(>0)):
+  Ethiopia  da=-0.156 [-0.185,-0.126] P=0.00  db=+0.580 P=1.00  dc=-0.250 P=0.00  dmarg(0.5)=+0.331 [+0.178,+0.490] P=1.00
+  Malawi    da=-0.975 [-1.098,-0.847] P=0.00  db=-2.913 P=0.00  dc=+0.690 P=0.99  dmarg(0.5)=-2.218 [-2.903,-1.577] P=0.00
+  Mali      da=-0.732 [-0.826,-0.627] P=0.00  db=-0.750 P=0.10  dc=-0.118 P=0.35  dmarg(0.5)=-0.867 [-1.412,-0.347] P=0.01
+  Nigeria   da=-1.040 [-1.119,-0.961] P=0.00  db=-8.018 P=0.00  dc=+2.940 P=1.00  dmarg(0.5)=-5.077 [-5.446,-4.675] P=0.00
+  Tanzania  da=-0.332 [-0.470,-0.176] P=0.00  db=+0.264 P=0.65  dc=-0.071 P=0.40  dmarg(0.5)=+0.188 [-0.567,+0.930] P=0.66
+  Uganda    da=-0.304 [-0.418,-0.200] P=0.00  db=-4.025 P=0.00  dc=+1.469 P=1.00  dmarg(0.5)=-2.555 [-2.962,-2.143] P=0.00
