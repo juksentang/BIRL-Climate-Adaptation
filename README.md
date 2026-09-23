@@ -25,6 +25,7 @@ Formal Analysis/
 ├── 05_BIRL_SVI/                       ← Variational Inference prototype (Colab)
 ├── 06_BIRL_MCMC/                      ← MCMC posterior inference (GCP)
 ├── 07_2050_Counter_Fact/              ← 2050 climate counterfactual & policy welfare
+├── 08_BIRL_v2/                        ← Re-estimation (2026-09): semi-parametric choice model, supersedes 06
 │
 └── docs/                              ← Build guides, reports, and analysis notes
 ```
@@ -58,6 +59,7 @@ CE tables, climate loss, policy value, synergy
 | 05 | `05_BIRL_SVI/` | `05_BIRL_SVI_Colab.ipynb` | Colab | ~hours |
 | 06 | `06_BIRL_MCMC/` | `run_birl.py` | GCP VM | ~hours |
 | 07 | `07_2050_Counter_Fact/` | `scripts/run_pipeline.py` | Local | ~30min |
+| 08 | `08_BIRL_v2/` | `run_v2.py`, `slurm/run_semipar.py` | Rorqual (H100) | ~6-20min |
 
 ### Step Descriptions
 
@@ -68,6 +70,7 @@ CE tables, climate loss, policy value, synergy
 - **05 BIRL SVI**: Variational inference prototype — 7 model variants explored; used for initialization of Step 06
 - **06 BIRL MCMC**: Hierarchical Bayesian IRL via NumPyro NUTS; 12K posterior samples, 0% divergence; final model: `hier_noalpha`
 - **07 2050 Counterfactual**: CMIP6 5-GCM ensemble → delta method → CF income matrices → Stone-Geary CE → policy welfare (6 scenarios × 6 countries × 3K posterior samples)
+- **08 BIRL v2 (2026-09)**: Re-estimation after diagnosing 06's results as parameterisation artefacts (γ at its bound, ρ confounded with choice noise, 31K unidentified household parameters). Country-level model, one-hot broadcasting, NUTS in minutes on one H100. Finding: CRRA ρ / subsistence γ are NOT identified from crop choice; a semi-parametric choice model V = a·μ + b·σ + c·σ² with crop fixed effects is (dispersion aversion uniform across countries, level sensitivity rising with income). Step 07's welfare stage must be rewritten against this model. See `docs/08_birl_v2/STATUS_2026-09-20.md`. Step 06 is kept only to reproduce paper v1.1.
 
 ## Execution
 
@@ -99,6 +102,18 @@ python3 scripts/run_pipeline.py --only 3 # Welfare computation only
 ```
 
 Prerequisites: Step 04 models + Step 06 posterior + CMIP6 data (via GEE).
+
+### Step 08 (Rorqual)
+
+```bash
+cd "08_BIRL_v2"
+bash slurm/sync_up.sh && bash slurm/setup_venv.sh     # once
+bash slurm/submit_chain.sh                            # smoke + timing, then 01-04 held
+bash slurm/run_semipar.sbatch                         # semi-parametric NUTS (submit with sbatch on the cluster)
+bash slurm/sync_down.sh
+```
+
+See `08_BIRL_v2/README.md` and `08_BIRL_v2/slurm/README.md`. Experiments (`slurm/exp_*.py`) and their results (`outputs/exp_*_tmp/*.json`) are documented in `docs/08_birl_v2/STATUS_2026-09-20.md`.
 
 ## Key Numbers
 

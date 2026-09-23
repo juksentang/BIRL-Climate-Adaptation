@@ -1,0 +1,67 @@
+{
+  "variant": "v2_country",
+  "tag": "timing",
+  "n_warmup": 50,
+  "n_samples": 20,
+  "n_chains": 4,
+  "chain_method": "vectorized",
+  "elapsed_s": 229.46411681175232,
+  "per_step_s_incl_compile": 2.5496012979083593,
+  "phases": {
+    "warmup": {
+      "elapsed_s": 192.14878869056702,
+      "n_draws": 200,
+      "leapfrog_total": 36654.0,
+      "mean_leapfrog_per_draw": 183.27,
+      "s_per_draw": 3.8429757738113404,
+      "s_per_leapfrog": 0.02096892985110133
+    },
+    "sampling_first": {
+      "elapsed_s": 25.764206409454346,
+      "n_draws": 80,
+      "leapfrog_total": 2336.0,
+      "mean_leapfrog_per_draw": 29.2,
+      "s_per_draw": 1.2882103204727173,
+      "s_per_leapfrog": 0.04411679179701086
+    },
+    "sampling_steady": {
+      "elapsed_s": 11.547725677490234,
+      "n_draws": 80,
+      "leapfrog_total": 2424.0,
+      "mean_leapfrog_per_draw": 30.3,
+      "s_per_draw": 0.5773862838745117,
+      "s_per_leapfrog": 0.0190556529331522
+    }
+  },
+  "compile_sampling_s_est": 14.216480731964111,
+  "mean_leapfrog_per_draw": 30.3,
+  "mean_leapfrog_per_draw_warmup": 183.27,
+  "s_per_leapfrog_steady": 0.0190556529331522,
+  "s_per_draw_steady": 0.5773862838745117,
+  "mean_accept_prob": 0.7482126951217651,
+  "div_count": 0,
+  "div_total": 80,
+  "peak_rss_gb": 4.91762,
+  "rss_after_load_gb": 2.898044,
+  "peak_device_gb": 2.509334272,
+  "peak_device_gb_per_chain": 0.627333568,
+  "device_memory": {
+    "device": "cuda:0",
+    "in_use_gb": 0.158344192,
+    "peak_gb": 2.509334272,
+    "limit_gb": 63.76390656
+  },
+  "projected_full_run_h": 1.1304766102592543,
+  "projected_full_run_h_naive_incl_compile": 1.4164451655046442,
+  "projection_note": "projected_full_run_h = s_per_leapfrog_steady x (warmup leapfrog/draw x 1000 + steady leapfrog/draw x 1000) / 3600, for 4 chain(s) vectorized on ['NVIDIA H100 80GB HBM3']. For another GPU / chain layout rescale s_per_leapfrog_steady: MIG 1g.10gb -> full H100 is roughly /7 (SMs+bandwidth); 1 -> 4 vectorized lock-stepped chains is roughly x3-4 on a memory-bound kernel, plus lock-step waits on the deepest tree. The warmup term is an upper bound (mean depth over 50 early draws).",
+  "date": "2026-09-20T02:28:49.198530",
+  "jax_version": "0.10.2",
+  "numpyro_version": "0.21.0",
+  "platform": "gpu",
+  "n_devices": 1,
+  "n_local_devices": 1,
+  "device_kinds": [
+    "NVIDIA H100 80GB HBM3"
+  ],
+  "host_devices_requested": 1
+}

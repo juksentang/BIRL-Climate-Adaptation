@@ -44,3 +44,29 @@ _archived_plots/
 .DS_Store
 *:Zone.Identifier
 *.log
+
+# ============================================
+# 08_BIRL_v2 run outputs: keep only small summaries
+# ============================================
+08_BIRL_v2/outputs/**
+!08_BIRL_v2/outputs/**/
+!08_BIRL_v2/outputs/PHASE1_HANDOFF.md
+!08_BIRL_v2/outputs/**/summary.csv
+!08_BIRL_v2/outputs/**/derived.csv
+!08_BIRL_v2/outputs/**/convergence.txt
+!08_BIRL_v2/outputs/**/model_diagnostics.json
+!08_BIRL_v2/outputs/**/results.json
+!08_BIRL_v2/outputs/**/run_info.json
+!08_BIRL_v2/outputs/**/timing.json
+!08_BIRL_v2/outputs/**/ppc_action_freq.csv
+!08_BIRL_v2/outputs/**/ppc_crop_x_intensity.csv
+!08_BIRL_v2/outputs/**/report.md
+!08_BIRL_v2/outputs/**/report.json
+!08_BIRL_v2/outputs/exp_*_tmp/**/*.json
+08_BIRL_v2/outputs/.jax_cache/
+08_BIRL_v2/outputs/slurm_logs/
+08_BIRL_v2/outputs/*_ckpt/
+08_BIRL_v2/outputs/*_cancelled_*/
+08_BIRL_v2/outputs/diag_tmp/
+# derived masks (regenerate with 08_BIRL_v2/slurm/make_env_test_mask.py)
+*.npy

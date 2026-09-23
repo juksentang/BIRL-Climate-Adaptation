@@ -1,0 +1,105 @@
+========================================================================
+Convergence report: v2_country
+Date: 2026-09-20T02:53:55.690631
+Platform: gpu x 1 ['NVIDIA H100 80GB HBM3']  chain_method=vectorized
+========================================================================
+Chains: 4   Draws/chain: 1000
+m_c (USD): Ethiopia=19.86, Malawi=19.12, Mali=129.96, Nigeria=102.74, Tanzania=26.03, Uganda=25.46
+
+Divergences: 12/4000 (0.0030)  [PASS]
+R-hat max:    1.0066  [PASS]
+ESS bulk min: 1159  [PASS]
+ESS tail min: 1134  [PASS]
+
+Parameter table (median [89% HPDI], r_hat, ess_bulk, ess_tail):
+  mu_rho                     0.4248 [  -0.9276,    1.8176]  r_hat=1.001  ess_b=3116  ess_t=3154
+  sigma_rho                  3.6221 [   2.7943,    4.4772]  r_hat=1.000  ess_b=2456  ess_t=2476
+  mu_s                       0.5144 [  -0.7011,    1.7473]  r_hat=1.000  ess_b=3457  ess_t=2399
+  sigma_s                    2.5601 [   1.6947,    3.4299]  r_hat=1.002  ess_b=1922  ess_t=2247
+  mu_lb                     -1.2527 [  -2.0617,   -0.4004]  r_hat=1.000  ess_b=2751  ess_t=2144
+  sigma_lb                   1.3033 [   0.7433,    1.8938]  r_hat=1.000  ess_b=2693  ess_t=2955
+  rho_c[Ethiopia]            4.9868 [   4.9362,    5.0000]  r_hat=1.001  ess_b=2871  ess_t=2193
+  rho_c[Malawi]              0.1059 [   0.1000,    0.1247]  r_hat=1.001  ess_b=2951  ess_t=1913
+  rho_c[Mali]                4.9917 [   4.9607,    5.0000]  r_hat=1.000  ess_b=2893  ess_t=1653
+  rho_c[Nigeria]             4.9230 [   4.6394,    5.0000]  r_hat=1.007  ess_b=1159  ess_t=1430
+  rho_c[Tanzania]            0.1045 [   0.1000,    0.1193]  r_hat=1.002  ess_b=2964  ess_t=1871
+  rho_c[Uganda]              4.9261 [   4.5036,    5.0000]  r_hat=1.002  ess_b=2373  ess_t=1885
+  s_c[Ethiopia]              0.7915 [   0.7702,    0.8000]  r_hat=1.001  ess_b=2713  ess_t=1737
+  s_c[Malawi]                0.7006 [   0.2799,    0.8000]  r_hat=1.001  ess_b=2681  ess_t=1938
+  s_c[Mali]                  0.1244 [   0.0967,    0.1502]  r_hat=1.003  ess_b=4568  ess_t=2865
+  s_c[Nigeria]               0.1572 [   0.1345,    0.1789]  r_hat=1.003  ess_b=1734  ess_t=1307
+  s_c[Tanzania]              0.7823 [   0.7229,    0.8000]  r_hat=1.001  ess_b=3152  ess_t=1706
+  s_c[Uganda]                0.7956 [   0.7838,    0.8000]  r_hat=1.002  ess_b=2191  ess_t=1631
+  s_lat_c[Ethiopia]          4.5375 [   2.7213,    6.8583]  r_hat=1.001  ess_b=2714  ess_t=1737
+  s_lat_c[Malawi]            1.9531 [  -1.3410,    5.8612]  r_hat=1.002  ess_b=2681  ess_t=1938
+  s_lat_c[Mali]             -1.6923 [  -1.9521,   -1.4369]  r_hat=1.003  ess_b=4568  ess_t=2865
+  s_lat_c[Nigeria]          -1.4085 [  -1.5812,   -1.2298]  r_hat=1.003  ess_b=1734  ess_t=1307
+  s_lat_c[Tanzania]          3.7868 [   1.6256,    6.3709]  r_hat=1.001  ess_b=3152  ess_t=1706
+  s_lat_c[Uganda]            5.2048 [   3.2605,    7.3560]  r_hat=1.002  ess_b=2191  ess_t=1631
+  gamma_c[Ethiopia]         15.7170 [  15.2929,   15.8852]  r_hat=1.001  ess_b=2713  ess_t=1737
+  gamma_c[Malawi]           13.3984 [   5.3525,   15.2987]  r_hat=1.001  ess_b=2681  ess_t=1938
+  gamma_c[Mali]             16.1638 [  12.5627,   19.5171]  r_hat=1.003  ess_b=4568  ess_t=2865
+  gamma_c[Nigeria]          16.1484 [  13.8183,   18.3786]  r_hat=1.003  ess_b=1734  ess_t=1307
+  gamma_c[Tanzania]         20.3597 [  18.8137,   20.8209]  r_hat=1.001  ess_b=3152  ess_t=1706
+  gamma_c[Uganda]           20.2566 [  19.9559,   20.3678]  r_hat=1.002  ess_b=2191  ess_t=1631
+  beta_c[Ethiopia]           0.0736 [   0.0693,    0.0777]  r_hat=1.001  ess_b=3875  ess_t=2695
+  beta_c[Malawi]             0.0443 [   0.0390,    0.0492]  r_hat=1.000  ess_b=3521  ess_t=2390
+  beta_c[Mali]               0.4271 [   0.4103,    0.4457]  r_hat=1.000  ess_b=4244  ess_t=2631
+  beta_c[Nigeria]            0.8857 [   0.8515,    0.9166]  r_hat=1.005  ess_b=1703  ess_t=1134
+  beta_c[Tanzania]           0.0530 [   0.0441,    0.0627]  r_hat=1.001  ess_b=4254  ess_t=2262
+  beta_c[Uganda]             0.1884 [   0.1509,    0.2312]  r_hat=1.001  ess_b=3637  ess_t=2046
+  rho_lat_c[Ethiopia]        5.9120 [   3.6557,    8.9966]  r_hat=1.001  ess_b=2873  ess_t=2193
+  rho_lat_c[Malawi]         -6.7145 [  -9.2404,   -4.4643]  r_hat=1.002  ess_b=2951  ess_t=1913
+  rho_lat_c[Mali]            6.3800 [   3.9310,    9.0587]  r_hat=1.000  ess_b=2894  ess_t=1653
+  rho_lat_c[Nigeria]         4.1369 [   1.7656,    7.2906]  r_hat=1.007  ess_b=1159  ess_t=1430
+  rho_lat_c[Tanzania]       -6.9817 [  -9.6505,   -5.0124]  r_hat=1.004  ess_b=2964  ess_t=1871
+  rho_lat_c[Uganda]          4.1795 [   1.3751,    7.6364]  r_hat=1.002  ess_b=2373  ess_t=1885
+  lb_c[Ethiopia]            -2.6092 [  -2.6649,   -2.5517]  r_hat=1.001  ess_b=3875  ess_t=2695
+  lb_c[Malawi]              -3.1158 [  -3.2318,   -2.9993]  r_hat=1.000  ess_b=3521  ess_t=2390
+  lb_c[Mali]                -0.8508 [  -0.8909,   -0.8081]  r_hat=1.000  ess_b=4244  ess_t=2631
+  lb_c[Nigeria]             -0.1214 [  -0.1570,   -0.0835]  r_hat=1.005  ess_b=1703  ess_t=1134
+  lb_c[Tanzania]            -2.9371 [  -3.1205,   -2.7696]  r_hat=1.001  ess_b=4254  ess_t=2262
+  lb_c[Uganda]              -1.6694 [  -1.8830,   -1.4579]  r_hat=1.001  ess_b=3637  ess_t=2046
+
+Posterior correlations per country (rho_c,s_c | log beta_c,rho_c | log beta_c,s_c):
+  Ethiopia    -0.021 |   0.119 |   0.060
+  Malawi       0.014 |  -0.032 |   0.046
+  Mali        -0.070 |   0.100 |  -0.012
+  Nigeria     -0.505 |   0.588 |  -0.301
+  Tanzania     0.014 |  -0.053 |   0.101
+  Uganda      -0.022 |   0.336 |   0.145
+  mu_rho_mu_s: 0.022
+  mu_rho_mu_lb: 0.011
+
+P(s_c > 0.55) per country:
+  Ethiopia   1.000  [WARN]
+  Malawi     0.745  [WARN]
+  Mali       0.000
+  Nigeria    0.000
+  Tanzania   0.997  [WARN]
+  Uganda     1.000  [WARN]
+
+At the posterior median: loglik = -682691.1, mean log p(chosen) = -3.075
+  share of obs with chosen action fully inside the floor (all 5 nodes d<0): 0.1176
+  share of obs with p(chosen) < 1e-3: 0.0001
+    Ethiopia   floor=0.1309  p<1e-3=0.0000
+    Malawi     floor=0.0368  p<1e-3=0.0000
+    Mali       floor=0.0188  p<1e-3=0.0002
+    Nigeria    floor=0.0192  p<1e-3=0.0002
+    Tanzania   floor=0.0158  p<1e-3=0.0000
+    Uganda     floor=0.2398  p<1e-3=0.0000
+  float32 guards: max reward (CE/m_c) = 187, max |logit| = 8.657 (resolution 1.03e-06 nat; cell obs=143530 action=23 Nigeria)
+  max q90 per country (USD): Ethiopia=2.015e+04, Malawi=4125, Mali=1.26e+04, Nigeria=3.237e+04, Tanzania=5857, Uganda=2827
+
+Spearman corr(CE(rho=0.3), CE(rho=4.5)) across feasible actions, mean per country (> 0.95: rho acts mostly as a temperature):
+  Ethiopia   0.930
+  Malawi     0.916
+  Mali       0.902
+  Nigeria    0.689
+  Tanzania   0.871
+  Uganda     0.837
+  overall    0.851
+
+PPC (100 draws): max |obs-pred| = 0.0757, mean = 0.0205
+
+[full run: 4 x (1000+1000), vectorized, gpu x 1, peak RSS 5.28 GB]
