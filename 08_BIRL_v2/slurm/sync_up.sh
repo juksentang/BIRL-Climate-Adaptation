@@ -56,6 +56,15 @@ done
 echo ">> 07 data: ssp245_cf.npz ssp585_cf.npz -> ${SSH_HOST}:${REMOTE_07}/data/"
 rsync -av ${DRY} -e "ssh -o BatchMode=yes" "${LOCAL_07}/data/ssp245_cf.npz" "${LOCAL_07}/data/ssp585_cf.npz" "${SSH_HOST}:${REMOTE_07}/data/"
 
+# ── cropchoice package at the repository root (pip install -e by setup_venv.sh) ──
+LOCAL_ROOT=$(cd "${LOCAL_PKG}/.." && pwd)
+echo ">> package: ${LOCAL_ROOT}/{cropchoice,tests,pyproject.toml,requirements.txt,README.md,LICENSE} -> ${SSH_HOST}:${REMOTE_ROOT}/"
+rsync -av ${DRY} --delete -e "ssh -o BatchMode=yes" --exclude '__pycache__/' --exclude '*.pyc' --exclude '.pytest_cache/' \
+      "${LOCAL_ROOT}/cropchoice" "${LOCAL_ROOT}/tests" "${SSH_HOST}:${REMOTE_ROOT}/"
+rsync -av ${DRY} -e "ssh -o BatchMode=yes" "${LOCAL_ROOT}/pyproject.toml" "${LOCAL_ROOT}/requirements.txt" \
+      "${LOCAL_ROOT}/README.md" "${LOCAL_ROOT}/LICENSE" "${SSH_HOST}:${REMOTE_ROOT}/"
+ssh -o BatchMode=yes "${SSH_HOST}" "rm -rf '${REMOTE_PKG}/src' '${REMOTE_PKG}/tests'"   # pre-package layout
+
 echo ">> chmod +x slurm/*.sh"
 ssh -o BatchMode=yes "${SSH_HOST}" "chmod +x ${REMOTE_PKG}/slurm/*.sh; ls -la ${REMOTE_DATA}"
 echo ">> sync_up done"

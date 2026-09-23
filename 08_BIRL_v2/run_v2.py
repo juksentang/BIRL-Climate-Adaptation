@@ -27,7 +27,6 @@ import time
 from datetime import datetime
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 parser = argparse.ArgumentParser(description="BIRL v2 MCMC runner")
 parser.add_argument("--variant", required=True, choices=["v2_country", "v2_country_gfix"])
@@ -61,13 +60,13 @@ args = parser.parse_args()
 
 import numpy as np
 
-from src.config import (DATA_DIR, OUT_DIR, DEVICE_INFO, N_DEVICES, PLATFORM, S_MAX,
+from cropchoice.config import (DATA_DIR, OUT_DIR, DEVICE_INFO, N_DEVICES, PLATFORM, S_MAX,
                         JAX_CACHE_DIR, log, add_file_log, peak_rss_gb, device_memory_gb)
-from src.data_loader import load_data, model_kwargs
-from src.models import MODELS
-from src.mcmc_runner import (run_mcmc_timed, run_mcmc_chunked, samples_by_chain, save_posterior,
+from cropchoice.data import load_data, model_kwargs
+from cropchoice.models_v2 import MODELS
+from cropchoice.inference import (run_mcmc_timed, run_mcmc_chunked, samples_by_chain, save_posterior,
                              load_posterior, choose_chain_method)
-from src.diagnostics import write_all_diagnostics
+from cropchoice.diagnostics import write_all_diagnostics
 
 
 def auto_tag():

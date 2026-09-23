@@ -35,6 +35,10 @@ source "${VENV}/bin/activate"
 pip install --no-index --quiet --upgrade pip
 echo ">> pip install --no-index ${PIP_PINS}"
 pip install --no-index ${PIP_PINS}
+pip install --no-index --quiet matplotlib || echo ">> matplotlib not in the wheelhouse: figures must be drawn locally"
+# the cropchoice package (repository root synced by sync_up.sh); --no-deps: the pins above are the environment
+echo ">> pip install -e ${REMOTE_ROOT} (cropchoice)"
+pip install --no-index --no-deps --no-build-isolation -e "${REMOTE_ROOT}" || pip install --no-deps -e "${REMOTE_ROOT}"
 
 echo
 echo ">> installed:"
@@ -57,5 +61,5 @@ cd "${REMOTE_PKG}"
 # keeps it small.  Compute nodes are cgroup-confined to --cpus-per-task, so no guard needed there.
 BIRL_HOST_DEVICES=1 BIRL_JAX_CACHE=0 JAX_PLATFORMS=cpu OMP_NUM_THREADS=2 \
     XLA_FLAGS="--xla_cpu_multi_thread_eigen=false" \
-    taskset -c 0-3 python -m pytest -q -x -m toy -p no:cacheprovider tests/
+    taskset -c 0-3 python -m pytest -q -x -m toy -p no:cacheprovider "${REMOTE_ROOT}/tests/"
 echo ">> setup_venv.sh done"

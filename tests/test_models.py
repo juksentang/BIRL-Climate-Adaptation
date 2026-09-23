@@ -18,10 +18,10 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.config import DATA_DIR, EPS_FRAC, S_MAX, QUAD_W, P_TAYLOR, RHO_LO, RHO_HI  # noqa: E402
+from cropchoice.config import DATA_DIR, EPS_FRAC, S_MAX, QUAD_W, P_TAYLOR, RHO_LO, RHO_HI  # noqa: E402
 import jax  # noqa: E402
 import jax.numpy as jnp  # noqa: E402
-from src.models import (smooth_surplus, certainty_equivalent, ce_from_nodes, five_points,  # noqa: E402
+from cropchoice.models_v2 import (smooth_surplus, certainty_equivalent, ce_from_nodes, five_points,  # noqa: E402
                         compute_logits, simulate_actions, log_likelihood, loglik_from_means,
                         country_params_from_latents, derive_country_params, latent_for_rho,
                         latent_for_s, INFEASIBLE_LOGIT, log_power_mean, add_precomputed)
@@ -344,7 +344,7 @@ def test_t5_precomputed_arrays_identical(toy):
     """compute_logits / log_likelihood give bit-identical results from the loader's
     precomputed q10/q50/q90/mask_obs and from the log arrays + mask (the loader
     and model_kwargs add the precomputed arrays; the toy dict has only the logs)."""
-    from src.data_loader import model_kwargs
+    from cropchoice.data import model_kwargs
     rho_c = jnp.array([0.5, 1.0, 2.0, 3.0, 4.5, 1.5], jnp.float32)
     s_c = jnp.array([0.1, 0.3, 0.59, 0.05, 0.4, 0.2], jnp.float32)
     beta_c = jnp.array([1.0, 3.0, 8.0, 0.5, 5.0, 2.0], jnp.float32)
@@ -483,8 +483,8 @@ def test_numpyro_models_trace(toy):
     """Both variants and all parameterisations trace on the toy data with the
     expected sample / deterministic sites."""
     from numpyro import handlers
-    from src.models import v2_country, v2_country_gfix
-    from src.data_loader import model_kwargs
+    from cropchoice.models_v2 import v2_country, v2_country_gfix
+    from cropchoice.data import model_kwargs
     d = model_kwargs(toy)
     for kw, sampled, dets in [
         ({}, {"mu_rho", "sigma_rho", "mu_s", "sigma_s", "mu_lb", "sigma_lb",

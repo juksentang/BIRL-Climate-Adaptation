@@ -1,7 +1,7 @@
 """
-Global configuration for BIRL v2: device setup, paths, model constants, logging.
+Global configuration for cropchoice: device setup, paths, model constants, logging.
 
-MUST be imported before any other src/ module (and before jax anywhere in the
+MUST be imported before any other cropchoice module (and before jax anywhere in the
 process): it reads BIRL_HOST_DEVICES and calls numpyro.set_host_device_count()
 BEFORE JAX is initialised, so that chain_method='parallel' can use several CPU
 "devices" when no accelerator is present.  On a GPU node set
@@ -11,8 +11,8 @@ Environment overrides (all optional):
   BIRL_HOST_DEVICES   host (CPU) device count for numpyro (default 4)
   BIRL_DATA_DIR       directory holding 06's birl_sample.parquet,
                       env_model_output.npz, action_space_config.json
-                      (default ../06_BIRL_MCMC/data relative to this package)
-  BIRL_OUT_DIR        output root (default <package>/outputs)
+                      (default <repo>/06_BIRL_MCMC/data)
+  BIRL_OUT_DIR        output root (default <repo>/08_BIRL_v2/outputs)
   BIRL_JAX_CACHE      JAX persistent compilation cache directory (default
                       <BIRL_OUT_DIR>/.jax_cache; set to "0" to disable).  Every
                       chunk / --resume / variant re-jits the 222K-row NUTS
@@ -33,10 +33,12 @@ numpyro.set_host_device_count(BIRL_HOST_DEVICES)
 
 import jax  # noqa: E402  — must come after set_host_device_count
 
-# ── Paths (relative to the package so the same code runs on the cluster) ──
-BASE_DIR = Path(__file__).resolve().parent.parent            # 08_BIRL_v2/
-DATA_DIR = Path(os.environ.get(
-    "BIRL_DATA_DIR", str((BASE_DIR.parent / "06_BIRL_MCMC" / "data")))).resolve()
+# ── Paths (relative to the repository root so the same code runs on the cluster) ──
+ROOT = Path(__file__).resolve().parent.parent                # repository root (contains cropchoice/)
+BASE_DIR = ROOT / "08_BIRL_v2"                               # historical home of the estimation outputs
+STEP06_DATA = ROOT / "06_BIRL_MCMC" / "data"
+STEP07_DIR = ROOT / "07_2050_Counter_Fact"
+DATA_DIR = Path(os.environ.get("BIRL_DATA_DIR", str(STEP06_DATA))).resolve()
 OUT_DIR = Path(os.environ.get("BIRL_OUT_DIR", str(BASE_DIR / "outputs"))).resolve()
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 

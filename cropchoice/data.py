@@ -21,8 +21,8 @@ import numpy as np
 import pandas as pd
 import jax.numpy as jnp
 
-from src.config import LOG_CLIP
-from src.models import add_precomputed
+from cropchoice.config import LOG_CLIP
+from cropchoice.models_v2 import add_precomputed
 
 log = logging.getLogger("birl_v2")
 

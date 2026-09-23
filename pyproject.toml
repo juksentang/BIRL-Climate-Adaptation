@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cropchoice"
+version = "0.2.0"
+description = "Structural crop-choice model, climate/policy counterfactuals and reporting for the six-country LSMS-ISA panel"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.1",
+    "pyarrow>=14",
+    "scipy>=1.12",
+    "jax>=0.4.30",
+    "numpyro>=0.15",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+# Exact versions used for the reported runs (Alliance wheelhouse on Rorqual, 2026-09).
+pinned = [
+    "jax==0.10.2", "jaxlib==0.10.2", "numpyro==0.21.0",
+    "numpy==2.4.2", "scipy==1.17.1", "pandas==2.3.3", "pytest==9.1.1",
+]
+cuda = ["jax_cuda12_plugin==0.10.2", "jax_cuda12_pjrt==0.10.2"]
+test = ["pytest>=8"]
+notebooks = ["jupyter", "ipykernel"]
+
+[project.scripts]
+cropchoice = "cropchoice.cli:main"
+
+[tool.setuptools]
+packages = ["cropchoice"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "toy: pure-math tests on synthetic data (no restricted data)",
+    "realdata: tests that load the 222K-row derived data (cluster or local copy)",
+]

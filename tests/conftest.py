@@ -1,5 +1,5 @@
 """
-pytest configuration for BIRL v2.
+pytest configuration for cropchoice (toy and real-data tests).
 
 Markers:
   toy       pure-math tests on a synthetic <= 50-row x 27-action dataset
@@ -19,12 +19,8 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-ROOT = Path(__file__).resolve().parent.parent
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-
-# src.config must be imported before jax anywhere (sets the host device count)
-from src.config import DATA_DIR  # noqa: E402
+# cropchoice.config must be imported before jax anywhere (sets the host device count)
+from cropchoice.config import DATA_DIR  # noqa: E402
 import jax.numpy as jnp  # noqa: E402
 
 COUNTRIES = ["Ethiopia", "Malawi", "Mali", "Nigeria", "Tanzania", "Uganda"]
@@ -75,6 +71,6 @@ def real_data():
     for f in ("birl_sample.parquet", "env_model_output.npz", "action_space_config.json"):
         if not (DATA_DIR / f).exists():
             pytest.skip(f"06 data not available: {DATA_DIR / f}")
-    from src.data_loader import load_data
+    from cropchoice.data import load_data
     return load_data(DATA_DIR)
 

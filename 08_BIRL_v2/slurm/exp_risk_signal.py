@@ -18,14 +18,13 @@ stronger where rainfall is more variable and for poorer households.
 Run from 08_BIRL_v2/:  python3 slurm/exp_risk_signal.py
 """
 import os, sys, time, json
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.environ.setdefault("BIRL_HOST_DEVICES", "1")
 
-from src.config import log, DATA_DIR, OUT_DIR  # noqa: E402
+from cropchoice.config import log, DATA_DIR, OUT_DIR  # noqa: E402
 import jax, jax.numpy as jnp, numpy as np, pandas as pd  # noqa: E402
 from jax.flatten_util import ravel_pytree  # noqa: E402
 from jax.scipy.optimize import minimize as jsp_minimize  # noqa: E402
-from src.data_loader import load_data, model_kwargs  # noqa: E402
+from cropchoice.data import load_data, model_kwargs  # noqa: E402
 
 
 def say(msg):
