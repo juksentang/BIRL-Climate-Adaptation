@@ -15,7 +15,7 @@
 # step failed, which cancels the dependants (kill_invalid_depend on Rorqual).
 # The walltime timing run lives in 00b_timing.sbatch (full H100, 4 chains):
 # on this 1g slice a 1-chain 50+20 run did not finish in 70 min.
-#   1. pytest -q tests/                 toy + realdata (all 222K x 27 cells; T1-T7 + guards)
+#   1. pytest -q <repo>/tests/          toy + realdata (all 222K x 27 cells; T1-T7 + guards)
 #   2. checkpoint / resume round-trip   run_v2.py 2 chains vectorized, 5+4 draws, chunk 2:
 #                                       run 1 stops after chunk 1 (warmup_state.pkl + mcmc_state.pkl +
 #                                       samples_partial.npz written), run 2 --resume continues from the
@@ -45,7 +45,7 @@ rc=0
 step() { echo; echo "==== [$1] $(date '+%F %T') ===="; }
 
 step "1/3 pytest (toy + realdata)"
-python3 -m pytest -q -p no:cacheprovider tests/ || { echo "!! pytest FAILED"; rc=1; }
+python3 -m pytest -q -p no:cacheprovider "${REMOTE_ROOT}/tests/" || { echo "!! pytest FAILED"; rc=1; }
 
 step "2/3 checkpoint / resume round-trip (2 chains vectorized, 5+4 draws, chunk 2)"
 CK="run_v2.py --variant v2_country --chains 2 --warmup 5 --samples 4 --chunk 2 --n-ppc 4 --tag ckpt"

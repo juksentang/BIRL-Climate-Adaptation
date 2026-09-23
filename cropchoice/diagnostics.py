@@ -38,10 +38,10 @@ from scipy.stats import rankdata
 from scipy.special import ndtri
 import jax
 import jax.numpy as jnp
-from numpyro.diagnostics import hpdi, gelman_rubin, effective_sample_size
+from numpyro.diagnostics import hpdi as _np_hpdi, gelman_rubin, effective_sample_size
 
-from src.config import HPDI_PROB, EPS_FRAC, DEVICE_INFO
-from src.models import (HYPER_SITES, COUNTRY_SITES, simulate_actions, compute_logits,
+from cropchoice.config import HPDI_PROB, EPS_FRAC, DEVICE_INFO
+from cropchoice.models_v2 import (HYPER_SITES, COUNTRY_SITES, simulate_actions, compute_logits,
                         compute_ce, log_likelihood, q_from_log, five_points, obs_mask)
 
 log = logging.getLogger("birl_v2")
@@ -54,6 +54,21 @@ SPEARMAN_RHOS = (0.3, 4.5)
 # =====================================================================
 # Rank-normalised r_hat / ESS
 # =====================================================================
+
+def hpdi(x, prob=HPDI_PROB):
+    """Highest-density interval (lo, hi) of a 1-D sample: the narrowest window that
+    holds floor(prob * n) sorted values.  NaNs are dropped; (nan, nan) for an empty
+    sample; a single value gives a degenerate interval.  Used by every summary in
+    the package (fit_semipar, report, sobol) so interval conventions cannot drift."""
+    x = np.sort(np.asarray(x, float).ravel()); x = x[~np.isnan(x)]; n = x.size
+    if n == 0:
+        return float("nan"), float("nan")
+    if n == 1:
+        return float(x[0]), float(x[0])
+    k = min(max(int(np.floor(prob * n)), 1), n - 1)
+    w = x[k:] - x[:n - k]; i = int(np.argmin(w))
+    return float(x[i]), float(x[i + k])
+
 
 def _split_chains(x):
     n_chains, n = x.shape
@@ -110,7 +125,7 @@ def _site_stats(x, prob):
     """x: (n_chains, n_draws) for one scalar quantity."""
     x = np.asarray(x, np.float64)
     flat = x.reshape(-1)
-    lo, hi = hpdi(flat, prob=prob)
+    lo, hi = _np_hpdi(flat, prob=prob)
     return {"median": float(np.median(flat)), "mean": float(flat.mean()),
             "sd": float(flat.std(ddof=1)) if flat.size > 1 else 0.0,
             "hpdi_lo": float(lo), "hpdi_hi": float(hi),

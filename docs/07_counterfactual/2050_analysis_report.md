@@ -1,5 +1,8 @@
 # Step 07: 2050 Climate Counterfactual Analysis — Complete Report
 
+> **Superseded (2026-09).** This document describes the Stone-Geary / CRRA stage used in paper v1.1. Its results were superseded by the Step 08 choice model; the current design is in `docs/08_birl_v2/STATUS_2026-09-20.md` and `07_2050_Counter_Fact/CHOICE_CF_SPEC.md`.
+
+
 **日期**: 2026-03-20
 **前置条件**: Environment Model (Step 04, R²=0.596), BIRL MCMC Posterior (Step 06, 0% divergence)
 **数据规模**: 222,023 observations, 15,644 households, 4,436 GPS points, 6 countries

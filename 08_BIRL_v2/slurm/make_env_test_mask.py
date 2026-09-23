@@ -10,9 +10,8 @@ Writes slurm/env_test_mask.npy (bool, one entry per observation).
 Run from 08_BIRL_v2/:  python3 slurm/make_env_test_mask.py
 """
 import os, sys
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import numpy as np, pandas as pd
-from src.config import DATA_DIR
+from cropchoice.config import DATA_DIR
 
 df = pd.read_parquet(DATA_DIR / "birl_sample.parquet", columns=["hh_id_merge"])
 rng = np.random.default_rng(42)

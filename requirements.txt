@@ -1,0 +1,14 @@
+# Runtime dependencies of the cropchoice package (Steps 07-08).  Loose bounds for
+# laptops/Colab; the exact versions of the reported runs are in pyproject.toml
+# [project.optional-dependencies].pinned (jax 0.10.2, numpyro 0.21.0, numpy 2.4.2,
+# scipy 1.17.1, pandas 2.3.3).  GPU: add jax_cuda12_plugin / jax_cuda12_pjrt matching
+# the jax version.  Steps 01-06 have their own environments (see their directories).
+numpy>=1.26
+pandas>=2.1
+pyarrow>=14
+scipy>=1.12
+jax>=0.4.30
+jaxlib>=0.4.30
+numpyro>=0.15
+matplotlib>=3.8
+pytest>=8

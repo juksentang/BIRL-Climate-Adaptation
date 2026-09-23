@@ -11,17 +11,16 @@ Times, on the real data (prints after every step, flushed):
 Run from 08_BIRL_v2/:  python3 slurm/diag_grad.py
 """
 import os, sys, time
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.environ.setdefault("BIRL_HOST_DEVICES", "1")
 
-from src.config import log  # noqa: E402  (sets host device count before jax import)
+from cropchoice.config import log  # noqa: E402  (sets host device count before jax import)
 import jax, jax.numpy as jnp, numpy as np  # noqa: E402
 import numpyro  # noqa: E402
 from numpyro.infer import MCMC, NUTS, SVI, Trace_ELBO  # noqa: E402
 from numpyro.infer.autoguide import AutoMultivariateNormal  # noqa: E402
 from numpyro.infer.util import initialize_model  # noqa: E402
-from src.data_loader import load_data, model_kwargs  # noqa: E402
-from src.models import v2_country  # noqa: E402
+from cropchoice.data import load_data, model_kwargs  # noqa: E402
+from cropchoice.models_v2 import v2_country  # noqa: E402
 
 
 def say(msg):
@@ -40,7 +39,7 @@ def timed(label, fn, n=5):
 
 
 say(f"devices: {jax.devices()}")
-from src.config import DATA_DIR
+from cropchoice.config import DATA_DIR
 data = load_data(DATA_DIR)
 mk = {"data": model_kwargs(data), "s_max": 0.6, "flat_priors": False, "noncentered": False}
 say("data loaded")
@@ -61,7 +60,7 @@ g = jax.jit(jax.grad(pot))
 timed("2 grad(potential)", lambda: g(z0))
 
 # 3. gradient exactness check of the one-hot broadcast vs plain gather
-from src.models import per_obs_params, EPS_FRAC  # noqa: E402
+from cropchoice.models_v2 import per_obs_params, EPS_FRAC  # noqa: E402
 _rho = jnp.array([0.7, 1.3, 2.9, 4.1, 1.0, 3.3], jnp.float32)
 _s = jnp.array([0.11, 0.23, 0.37, 0.05, 0.5, 0.42], jnp.float32)
 _b = jnp.array([2.2, 7.7, 4.4, 1.1, 5.5, 3.3], jnp.float32)

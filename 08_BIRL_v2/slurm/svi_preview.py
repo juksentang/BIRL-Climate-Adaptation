@@ -5,16 +5,15 @@ the NUTS jobs run; NOT a substitute for 02_main.  Also refits with s fixed at
 Run from 08_BIRL_v2/:  python3 slurm/svi_preview.py [steps]
 """
 import os, sys, time, json
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.environ.setdefault("BIRL_HOST_DEVICES", "1")
 
-from src.config import log, DATA_DIR, OUT_DIR  # noqa: E402
+from cropchoice.config import log, DATA_DIR, OUT_DIR  # noqa: E402
 import jax, jax.numpy as jnp, numpy as np  # noqa: E402
 import numpyro  # noqa: E402
 from numpyro.infer import SVI, Trace_ELBO  # noqa: E402
 from numpyro.infer.autoguide import AutoMultivariateNormal  # noqa: E402
-from src.data_loader import load_data, model_kwargs  # noqa: E402
-from src.models import v2_country, v2_country_gfix, derive_country_params, log_likelihood  # noqa: E402
+from cropchoice.data import load_data, model_kwargs  # noqa: E402
+from cropchoice.models_v2 import v2_country, v2_country_gfix, derive_country_params, log_likelihood  # noqa: E402
 
 STEPS = int(sys.argv[1]) if len(sys.argv) > 1 else 6000
 

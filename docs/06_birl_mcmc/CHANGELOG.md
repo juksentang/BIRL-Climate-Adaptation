@@ -1,4 +1,7 @@
-# CHANGELOG - 05_BIRL_MCMC
+# CHANGELOG - 06_BIRL_MCMC
+
+> **Superseded (2026-09).** The `hier_noalpha` model documented here is kept only to reproduce paper v1.1; ρ and γ are not identified from crop choice. Current model and results: `docs/08_birl_v2/STATUS_2026-09-20.md`.
+
 
 ## Design (2026-03-19)
 

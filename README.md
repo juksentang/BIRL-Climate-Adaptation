@@ -1,139 +1,114 @@
-## Acknowledgments
+# Structural crop-choice model for climate adaptation in Sub-Saharan Africa
 
-Cloud computing resources were provided by the Google Cloud TPU Research Cloud (TRC) program (Steps 05-06). The Step 08 re-estimation was enabled in part by support provided by Calcul Québec (calculquebec.ca) and the Digital Research Alliance of Canada (alliancecan.ca), on the Rorqual cluster. Geospatial data extraction was supported by the Google Earth Engine (GEE) academic research quota.
+A Bayesian structural discrete-choice model of smallholder crop and input choices, estimated on 222,023 plot-season observations from 15,644 households in six LSMS-ISA countries (Ethiopia, Malawi, Mali, Nigeria, Tanzania, Uganda; 2008–2023), and used to simulate crop choices, incomes and downside risk under 2050 climate (CMIP6, SSP2-4.5 / SSP5-8.5) and under transfer, floor and index-insurance policies.
 
-# BIRL Formal Analysis Pipeline
+一句话：六国农户的作物选择结构模型，加 2050 气候与政策反事实。**三种跑法，按你有多少数据和算力选。**
 
-Bayesian Inverse Reinforcement Learning for Smallholder Agricultural Decision-Making.
-6 Sub-Saharan African countries (Ethiopia, Malawi, Mali, Nigeria, Tanzania, Uganda), 2008–2023.
+---
 
-## Directory Structure
+## Three ways to run this
 
-```
+| Tier | What you need | Command | Time | What you get |
+|---|---|---|---|---|
+| **0 — figures from tracked results** | Python, `pip install -e .`; no data | `jupyter notebook notebooks/00_paper_figures.ipynb` | ~1 min | Every figure and table in the paper, regenerated from the CSV/JSON summaries tracked in this repo |
+| **1 — re-estimate the model and the base counterfactual** | Two derived data files (see *Data*), a free Colab GPU (CPU works, slower) | open `notebooks/01_reproduce_colab.ipynb` in Colab, or `python -m cropchoice fit-semipar && python -m cropchoice counterfactual` | ~20 min on a T4/L4, ~1 h on 4 CPU cores | The country-level posterior (SVI, optional NUTS), the ssp585 counterfactual and the headline figure |
+| **2 — full pipeline** (optional) | Raw LSMS-ISA access, Google Earth Engine, a GPU cluster with SLURM | see *Step map* and `08_BIRL_v2/slurm/README.md` | hours to days | Environment model, all MCMC variants, simulation-recovery test, Sobol sweep, robustness experiments |
 
-Formal Analysis/
-├── README.md
-│
-├── data/                              ← Shared data
-│   ├── all_countries_panel_birl.parquet   ← Full panel (514K × 211)
-│   └── birl_sample.parquet                ← Analysis sample (222K × 244)
-│
-├── 01_Data_Screening/                 ← Sample selection & cleaning
-├── 02_Action_Space/                   ← 27 actions (9 crops × 3 intensity)
-├── 03_FDH/                            ← Order-m FDH frontier estimation
-├── 04_Env_Model/                      ← LightGBM environment model (Colab)
-├── 05_BIRL_SVI/                       ← Variational Inference prototype (Colab)
-├── 06_BIRL_MCMC/                      ← MCMC posterior inference (GCP)
-├── 07_2050_Counter_Fact/              ← 2050 climate counterfactual & policy welfare
-├── 08_BIRL_v2/                        ← Re-estimation (2026-09): semi-parametric choice model, supersedes 06
-│
-└── docs/                              ← Build guides, reports, and analysis notes
-```
+Tier 0 is what a reader or reviewer needs. Tier 1 is what a co-author needs to check the numbers. Tier 2 is for extending the work.
 
-## Pipeline Overview
-
-```
-all_countries_panel_birl.parquet (514K × 211)
-    │
-    ▼  Steps 01-03 (local, ~30s)
-birl_sample.parquet (222K × 244, with actions + FDH efficiency)
-    │
-    ▼  Step 04 (Colab, ~2.5h)
-env_model_output.npz + model_mu.txt + model_sigma.txt
-    │
-    ▼  Step 05→06 (Colab/GCP, hours, Complete analysis requires 8Chips TPU V4)
-posterior.pkl (MCMC: ρ_c, γ_c per country, 12K samples)
-    │
-    ▼  Step 07 (local, ~30min)
-CE tables, climate loss, policy value, synergy
-```
-
-## Pipeline Steps
-
-| Step | Directory | Runner | Environment | Time |
-|------|-----------|--------|-------------|-----:|
-| 01 | `01_Data_Screening/` | `screen_and_clean.py` | Local | ~6s |
-| 02 | `02_Action_Space/` | `build_action_space.py` | Local | ~5s |
-| 03 | `03_FDH/` | `run_fdh.py` | Local | ~19s |
-| 04 | `04_Env_Model/` | `04_env_model.ipynb` | Colab | ~2.5h |
-| 05 | `05_BIRL_SVI/` | `05_BIRL_SVI_Colab.ipynb` | Colab | ~hours |
-| 06 | `06_BIRL_MCMC/` | `run_birl.py` | GCP VM | ~hours |
-| 07 | `07_2050_Counter_Fact/` | `scripts/run_pipeline.py` | Local | ~30min |
-| 08 | `08_BIRL_v2/` | `run_v2.py`, `slurm/run_semipar.py` | Rorqual (H100) | ~6-20min |
-
-### Step Descriptions
-
-- **01 Data Screening**: Filter panel to 222K obs / 15.6K HH (≥2 waves); winsorize; handle missing values; derive variables
-- **02 Action Space**: Construct 9 crops × 3 input intensity = 27 discrete actions; build AEZ feasibility masks
-- **03 FDH**: Order-m Free Disposal Hull frontier (m=25, B=200); efficiency scores; survival thresholds
-- **04 Env Model**: LightGBM μ+σ models (Optuna tuned); predict income distribution (q10/q50/q90) for 222K×27; OOS R²=0.596
-- **05 BIRL SVI**: Variational inference prototype — 7 model variants explored; used for initialization of Step 06
-- **06 BIRL MCMC**: Hierarchical Bayesian IRL via NumPyro NUTS; 12K posterior samples, 0% divergence; final model: `hier_noalpha`
-- **07 2050 Counterfactual**: CMIP6 5-GCM ensemble → delta method → CF income matrices → Stone-Geary CE → policy welfare (6 scenarios × 6 countries × 3K posterior samples)
-- **08 BIRL v2 (2026-09)**: Re-estimation after diagnosing 06's results as parameterisation artefacts (γ at its bound, ρ confounded with choice noise, 31K unidentified household parameters). Country-level model, one-hot broadcasting, NUTS in minutes on one H100. Finding: CRRA ρ / subsistence γ are NOT identified from crop choice; a semi-parametric choice model V = a·μ + b·σ + c·σ² with crop fixed effects is (dispersion aversion uniform across countries, level sensitivity rising with income). Step 07's welfare stage must be rewritten against this model. See `docs/08_birl_v2/STATUS_2026-09-20.md`. Step 06 is kept only to reproduce paper v1.1.
-
-## Execution
-
-### Steps 01-03 (local, ~10mins)
+### Install
 
 ```bash
-cd "Formal Analysis"
-python3 01_Data_Screening/screen_and_clean.py
-python3 02_Action_Space/build_action_space.py
-python3 03_FDH/run_fdh.py
+git clone https://github.com/juksentang/BIRL-Climate-Adaptation.git
+cd BIRL-Climate-Adaptation
+pip install -e .            # installs the `cropchoice` package and pinned dependencies (requirements.txt)
+python -m pytest tests -q -m toy   # optional: math checks on synthetic data, no real data needed
 ```
 
-### Step 04 (Google Colab)
+Tier 1 on a GPU additionally needs a CUDA build of JAX (`pip install "jax[cuda12]"`); the Colab notebook does this for you.
 
-Upload `04_Env_Model/04_env_model.ipynb` to Colab with GPU runtime.
+### Data
 
-### Steps 05-06 (remote)
+This repository contains code, tracked result summaries and the country-level posterior (`08_BIRL_v2/outputs/semipar/posterior.npz`, six countries × (a, b, c) + crop fixed effects, no household data). Tier 1 needs two derived files that we cannot redistribute because they are built from restricted LSMS-ISA microdata:
 
-- **05**: Upload `05_BIRL_SVI/05_BIRL_SVI_Colab.ipynb` to Colab (CPU sufficient)
-- **06**: Deploy `06_BIRL_MCMC/` to GCP VM. See `06_BIRL_MCMC/Analysis.md` for details.
+- `06_BIRL_MCMC/data/birl_sample.parquet` (222,023 × 245, the analysis sample)
+- `06_BIRL_MCMC/data/env_model_output.npz` (predicted income quantiles q10/q50/q90 for every observation × 27 actions)
 
-### Step 07 (local, ~1hour)
+`DATA_ACCESS.md` explains how to obtain the LSMS-ISA surveys and rebuild these files (Steps 01–04), and what can be shared with collaborators directly. `python -m cropchoice` reads them from `06_BIRL_MCMC/data/` by default; override with `BIRL_DATA_DIR=/path`.
+
+---
+
+## Step map
+
+```
+LSMS-ISA + geospatial panel (514K × 211, built in ../Nigeria/)
+    │  Steps 01–03  screening, action space (9 crops × 3 input intensities = 27), FDH frontier      local, ~30 s
+    ▼
+birl_sample.parquet (222K × 245)
+    │  Step 04      LightGBM μ / σ environment model → q10/q50/q90 for 222K × 27                  Colab, ~2.5 h
+    ▼
+env_model_output.npz
+    │  Step 08      semi-parametric choice model  V = a·μ + b·σ + c·σ² + crop FE,  NUTS             one H100, ~6 min
+    ▼
+08_BIRL_v2/outputs/semipar/posterior.npz  (tracked)
+    │  Step 07      CMIP6 2050 deltas → counterfactual quantiles → choice probabilities, incomes,     stage 3: ~1 min GPU
+    ▼              downside risk, policy scenarios, Sobol sensitivity
+07_2050_Counter_Fact/results/choice_cf*/   (tables, figures, indices tracked)
+```
+
+| Step | Directory | Status | Runner | Where |
+|---|---|---|---|---|
+| 01 | `01_Data_Screening/` | live | `screen_and_clean.py` | local |
+| 02 | `02_Action_Space/` | live | `build_action_space.py` | local |
+| 03 | `03_FDH/` | live | `run_fdh.py` | local |
+| 04 | `04_Env_Model/` | live | `04_env_model.ipynb` | Colab |
+| 05 | `05_BIRL_SVI/` | **superseded** (paper v1.1 only) | `05_BIRL_SVI_Colab.ipynb` | Colab |
+| 06 | `06_BIRL_MCMC/` | **superseded** (paper v1.1 only) | `run_birl.py` | GCP TPU |
+| 07 | `07_2050_Counter_Fact/` | live; stage 3 rewritten 2026-09 | `scripts/run_pipeline.py`, `python -m cropchoice counterfactual` | local / cluster |
+| 08 | `08_BIRL_v2/` | live | `python -m cropchoice fit-semipar`, `slurm/*.sbatch` | cluster |
+
+Steps 05 and 06 are kept unchanged so that paper v1.1 can be reproduced; see the `SUPERSEDED.md` in each. Their results were superseded because the CRRA / Stone-Geary parameters they estimate turned out not to be identified from crop choice (`docs/08_birl_v2/STATUS_2026-09-20.md`).
+
+The shared code lives in the `cropchoice` package (data loading, the choice models, NUTS/SVI runners, diagnostics, policy transforms, the counterfactual engine, reporting). The scripts under `07_2050_Counter_Fact/scripts/` and `08_BIRL_v2/slurm/` are thin wrappers around it. The Step 07 design is specified in `07_2050_Counter_Fact/CHOICE_CF_SPEC.md`.
+
+### Step 07 stages
 
 ```bash
-cd "07_2050_Counter_Fact"
-python3 scripts/run_pipeline.py          # Stages 1-3
-python3 scripts/run_pipeline.py --from 2 # Resume from stage 2
-python3 scripts/run_pipeline.py --only 3 # Welfare computation only
+cd 07_2050_Counter_Fact
+python scripts/run_pipeline.py --only 1     # CMIP6 deltas at the LSMS points (needs GEE exports in data/cmip6_raw)
+python scripts/run_pipeline.py --only 2     # counterfactual quantile matrices ssp245_cf.npz, ssp585_cf.npz
+python scripts/run_pipeline.py --only 3     # choice-model counterfactual  (= python -m cropchoice counterfactual)
+python scripts/run_pipeline.py --only 4     # tables and figures           (= python -m cropchoice report)
+python scripts/run_pipeline.py --only 5     # Sobol sweep of the policy parameters (optional, GPU)
 ```
 
-Prerequisites: Step 04 models + Step 06 posterior + CMIP6 data (via GEE).
+Stages 3–5 only need `posterior.npz` (tracked), the two CF matrices and the two derived data files.
 
-### Step 08 (Rorqual)
+### Step 08 on a cluster (optional)
 
-```bash
-cd "08_BIRL_v2"
-bash slurm/sync_up.sh && bash slurm/setup_venv.sh     # once
-bash slurm/submit_chain.sh                            # smoke + timing, then 01-04 held
-bash slurm/run_semipar.sbatch                         # semi-parametric NUTS (submit with sbatch on the cluster)
-bash slurm/sync_down.sh
-```
+`08_BIRL_v2/slurm/README.md` documents the Rorqual (Alliance Canada) package: copy `slurm/env.example.sh` to `slurm/env.sh` and fill in your user and allocation; `sync_up.sh`, `setup_venv.sh`, `submit_chain.sh`, `sb.sh` (adds `--account`/`--output` at submission), `sync_down.sh`. Any SLURM cluster with an NVIDIA GPU works with the same scripts after editing `env.sh`.
 
-See `08_BIRL_v2/README.md` and `08_BIRL_v2/slurm/README.md`. Experiments (`slurm/exp_*.py`) and their results (`outputs/exp_*_tmp/*.json`) are documented in `docs/08_birl_v2/STATUS_2026-09-20.md`.
+---
 
-## Key Numbers
+## Main results (September 2026)
 
-| Metric | Value |
-|--------|-------|
-| Countries | 6 (Ethiopia, Malawi, Mali, Nigeria, Tanzania, Uganda) |
-| Observations (screened) | 222,023 |
-| Households | 15,644 |
-| Actions | 27 (9 crops × 3 intensity) |
-| AEZ zones | 6 |
-| FDH efficiency (mean) | 0.289 |
-| Variables (final sample) | 244 |
-| Env Model R² (OOS) | 0.596 |
-| MCMC samples | 12,000 (4 chains × 3,000) |
-| MCMC divergence | 0% |
-| GCMs (2050 ensemble) | 5 (ACCESS-CM2, MIROC6, MRI-ESM2-0, INM-CM5-0, IPSL-CM6A-LR) |
-| SSP scenarios | 2 (SSP2-4.5, SSP5-8.5) |
-| Policy scenarios | 6 (baseline, 2 climate, insurance, safety net, combined) |
+Full account with tables: `docs/08_birl_v2/STATUS_2026-09-20.md`. In short:
 
-## Data Sources
+- Within the CRRA / Stone-Geary family, risk aversion ρ and the subsistence threshold γ are **not identified** from crop choice: ρ sits at its bounds in every country, γ at its bound in three. No classical utility family (CRRA, rank-dependent, expected shortfall, safety-first) fits the choices.
+- A semi-parametric choice model V = a·μ + b·σ + c·σ² with crop fixed effects is identified (0 divergences, r̂ ≤ 1.003). Dispersion aversion is present in all six countries; the **level coefficient a falls with poverty** (Nigeria 1.71, Mali 1.34, Uganda 0.91, Ethiopia 0.41, Tanzania ≈ 0, Malawi < 0), and within every country the poorest asset tercile has a significantly lower a.
+- Hence in the four low-income countries a variance cut moves crop choice about twice as much as an income transfer, in Mali one third as much (holds on 75% of the policy-parameter box; the level of the ratio depends on the transfer size).
+- Floors and index insurance shift choices toward safer, lower-mean crops. Safety net vs insurance per resource dollar has no robust cross-country ranking.
+- 2050 (SSP5-8.5): expected income −27% in Mali, −5% in Nigeria, slightly up elsewhere.
+
+Key numbers: 6 countries, 222,023 observations, 15,644 households, 27 actions, environment-model out-of-sample R² = 0.596, 5 CMIP6 GCMs, 2 SSPs, 6 policy scenarios, K = 200 posterior draws through every counterfactual.
+
+---
+
+## A note on names
+
+Directory names and environment variables keep the prefix `BIRL` (Bayesian inverse reinforcement learning), the name under which the project started. Methodologically, single-step maximum-entropy IRL with known dynamics reduces to the structural discrete-choice model estimated here, so the current papers describe the method as a Bayesian structural (revealed-preference) crop-choice model. The prefix is kept only to avoid breaking paths on the cluster and in older documents.
+
+## Data sources
 
 - **LSMS-ISA**: World Bank Living Standards Measurement Study — Integrated Surveys on Agriculture
 - **CHIRPS**: Climate Hazards Group InfraRed Precipitation with Station data (1997–2023, via GEE)
@@ -147,13 +122,22 @@ See `08_BIRL_v2/README.md` and `08_BIRL_v2/slurm/README.md`. Experiments (`slurm
 
 ## Changelog
 
+### 2026-09-23 — Step 07 rewrite, refactor for onboarding
+
+- Step 07's welfare stage now runs on the Step 08 choice model: policies act on the income distribution (transfer, variance cut, floor, index insurance with basis risk and loading), outcomes are crop shares, expected income, exact downside probability and expected shortfall, a logsum compensating variation where the level coefficient is positive, and calibrated-ρ certainty equivalents as sensitivity; a Sobol sweep covers the policy parameters. The Stone-Geary stage is kept as `scripts/03_compute_welfare_v1.py`; its products moved to `results/v1_stone_geary/`.
+- Step 08 gained the asset-tercile version of the model (`slurm/run_semipar_assets.py`).
+- Shared code consolidated into the `cropchoice` package with `pyproject.toml`, tests moved to `tests/`, two notebooks added (`notebooks/`), `posterior.npz` tracked, superseded documents marked, this README rewritten around the three tiers.
+
 ### 2026-09 — Step 08: re-estimation and repositioning
 
 - **Why.** Diagnostics on the paper v1.1 results (Step 06, `hier_noalpha`) showed that the country-level γ estimates sat at an upper bound derived from the pooled per-plot income median, that the un-scaled reward let ρ absorb choice noise (β = 0.14), and that the 31K household-level parameters were not identified. The policy ranking (safety nets vs. insurance) inherited these artefacts.
 - **What was done.** New Step 08 (`08_BIRL_v2/`): country-level model, share-parameterised γ, CE-scaled reward, one-hot parameter broadcasting (a gather-transpose scatter had made gradients 300x slower), chunked NUTS with checkpoint/resume, simulation-recovery test, 96 unit tests, and a Rorqual (H100) SLURM package. Runs take minutes instead of hours.
-- **What was found.** Within the CRRA / Stone-Geary family, ρ and γ are not identified from crop choice (ρ at its bounds in every country). The environment model shows no leakage on held-out households, and its σ is not a familiarity proxy. Choices load on the predicted 10th percentile 2 to 14x more than on the 90th; no classical utility family fits. A semi-parametric choice model V = a·μ + b·σ + c·σ² with crop fixed effects is identified: dispersion aversion is uniform across countries, level sensitivity rises with income.
-- **Consequences.** Step 06 is kept only to reproduce paper v1.1. Step 07's welfare stage still consumes the Step 06 posterior and is being rewritten against the Step 08 model (policies as shifts of the income distribution; calibrated ρ for welfare). Full account for collaborators: `docs/08_birl_v2/STATUS_2026-09-20.md`.
+- **What was found.** Within the CRRA / Stone-Geary family, ρ and γ are not identified from crop choice (ρ at its bounds in every country). The environment model shows no leakage on held-out households, and its σ is not a familiarity proxy. Choices load on the predicted 10th percentile 2 to 14x more than on the 90th; no classical utility family fits. A semi-parametric choice model V = a·μ + b·σ + c·σ² with crop fixed effects is identified: dispersion aversion is uniform across countries, level sensitivity rising with income.
+- **Consequences.** Step 06 is kept only to reproduce paper v1.1. Step 07's welfare stage was rewritten against the Step 08 model (2026-09-23, above). Full account for collaborators: `docs/08_birl_v2/STATUS_2026-09-20.md`.
 - **Repository.** Only small summaries under `08_BIRL_v2/outputs/` are tracked; cluster user and allocation live in an untracked `slurm/env.sh` (template `env.example.sh`), and `slurm/sb.sh` supplies `--account`/`--output` at submission.
 
-## Contributors
+## Acknowledgments
 
+Cloud computing resources were provided by the Google Cloud TPU Research Cloud (TRC) program (Steps 05-06). The Step 08 re-estimation was enabled in part by support provided by Calcul Québec (calculquebec.ca) and the Digital Research Alliance of Canada (alliancecan.ca), on the Rorqual cluster. Geospatial data extraction was supported by the Google Earth Engine (GEE) academic research quota.
+
+## Contributors

@@ -1,5 +1,8 @@
 # BIRL MCMC 分析完整报告
 
+> **Superseded (2026-09).** The `hier_noalpha` model documented here is kept only to reproduce paper v1.1; ρ and γ are not identified from crop choice. Current model and results: `docs/08_birl_v2/STATUS_2026-09-20.md`.
+
+
 > 日期：2026-03-20
 > 阶段：MCMC 完成，2050 反事实分析待执行
 > 前序：05_BIRL_SVI（SVI 探索，8 个变体，~25 分钟）

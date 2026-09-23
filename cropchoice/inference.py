@@ -26,7 +26,7 @@ import jax.numpy as jnp
 import numpyro
 from numpyro.infer import MCMC, NUTS
 
-from src.config import N_DEVICES, PLATFORM, host_ram_gb, device_memory_gb
+from cropchoice.config import N_DEVICES, PLATFORM, host_ram_gb, device_memory_gb
 
 log = logging.getLogger("birl_v2")
 

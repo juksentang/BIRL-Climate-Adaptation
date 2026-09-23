@@ -1,6 +1,6 @@
 # Data Access & Licensing
 
-This repository contains **code only**. All data files (`.parquet`, `.npz`, `.pkl`, `.csv` with GPS coordinates) are excluded from version control via `.gitignore`.
+This repository contains code, tracked result summaries, and one derived artefact with no household data (`08_BIRL_v2/outputs/semipar/posterior.npz`: country-level posterior draws of the choice model). All other data files (`.parquet`, `.npz`, `.pkl`, `.csv` with GPS coordinates) are excluded from version control via `.gitignore`.
 
 To reproduce results, you must obtain the following datasets under their respective licenses.
 
@@ -13,8 +13,8 @@ All household-level panel data derive from World Bank LSMS-ISA surveys. These ar
 | File in Repo | Source Dataset | Access URL |
 |-------------|---------------|------------|
 | `data/all_countries_panel_birl.parquet` | LSMS-ISA (6 countries, see below) | See per-country links |
-| `data/birl_sample.parquet` | Derived from above (Steps 01-03) | Reproduce from code |
-| `04_Env_Model/env_model_output.npz` | Model predictions on above | Reproduce from code |
+| `06_BIRL_MCMC/data/birl_sample.parquet` (= `data/birl_sample.parquet`) | Derived from above (Steps 01-03); **Tier 1 input** | Reproduce from code, or request from the authors under the LSMS terms |
+| `06_BIRL_MCMC/data/env_model_output.npz` (= `04_Env_Model/env_model_output.npz`) | Model predictions on above; **Tier 1 input** | Reproduce from code (Step 04), or request from the authors |
 | `04_Env_Model/*_predictions.parquet` | Model predictions on above | Reproduce from code |
 | `07_2050_Counter_Fact/data/ssp*_cf.npz` | Counterfactual predictions on above | Reproduce from code |
 | `07_2050_Counter_Fact/data/gps_points_for_gee.csv` | GPS coordinates from LSMS | See below |
@@ -79,11 +79,13 @@ The following files contain no individual-level data and can be shared openly:
 - `04_Env_Model/model_mu.txt`, `model_sigma.txt` (LightGBM tree structures)
 - `04_Env_Model/env_model_metrics.json`, `importance_*.csv`
 - `04_Env_Model/study_*.pkl` (Optuna hyperparameter search)
-- `07_2050_Counter_Fact/data/posterior_country_params.npz` (6 country-level params only)
+- `07_2050_Counter_Fact/data/posterior_country_params.npz` (6 country-level params only, v1)
+- `08_BIRL_v2/outputs/semipar/posterior.npz` (tracked: country-level a, b, c and crop fixed effects, 4 × 1000 draws)
 - `07_2050_Counter_Fact/data/ndvi_model_*.joblib` (regression weights)
 - `07_2050_Counter_Fact/data/cmip6_raw/*.csv` (public CMIP6 data)
 - `07_2050_Counter_Fact/data/cmip6_processed/ensemble_deltas.parquet` (climate deltas, no HH data)
-- `07_2050_Counter_Fact/results/*.csv` and `ce_posterior_samples.npz` (country-level aggregates)
+- `07_2050_Counter_Fact/results/v1_stone_geary/*.csv` and `ce_posterior_samples.npz` (v1 country-level aggregates)
+- `07_2050_Counter_Fact/results/choice_cf*/` tables, figures, indices and run info (country-level aggregates)
 - `05_BIRL_SVI/results/*_guide.npz`, `*_elbo.csv`, `*_ppc.csv`, `*_svi_checkpoint.pkl` (population-level)
 - `06_BIRL_MCMC/outputs/*/main_country_params.csv`, `main_global_params.csv`, `ppc_action_freq.csv`, `correlation_matrix.csv`
 - `.ipynb` notebooks (after clearing outputs with `jupyter nbconvert --clear-output`)
@@ -96,5 +98,19 @@ The following files contain no individual-level data and can be shared openly:
 2. Run the upstream data pipeline to produce `all_countries_panel_birl.parquet` (see Nigeria/ directory)
 3. Run Formal Analysis Steps 01-03 locally (~30s)
 4. Run Step 04 on Google Colab (~2.5h)
-5. Run Steps 05-06 on GCP with TPU v4 (see `docs/06_birl_mcmc/`)
-6. Run Step 07 locally (~30min)
+5. Run Step 08 on a GPU (`python -m cropchoice fit-semipar`; minutes on one GPU) — Steps 05-06 are only needed to reproduce paper v1.1
+6. Run Step 07 stages 1-5 (`07_2050_Counter_Fact/README.md`)
+
+Tier 1 of the root README needs only the two derived files above plus the tracked posterior.
+
+## Statistical disclosure control for tracked outputs
+
+The repository tracks aggregates only: country-level and country x action or
+country x asset-tercile summaries, posterior draws of country-level parameters
+(`08_BIRL_v2/outputs/semipar/posterior.npz`: 180 parameters per draw, not
+invertible to any observation), ELBO traces, and scenario tables. No
+per-plot or per-household file is tracked (`*.parquet`, `*.pkl`, `*.npy` and
+the GPS point export are ignored). Count cells below 10 observations are
+suppressed. `python3 tools/disclosure_scan.py` checks every tracked file for
+identifier fields, per-observation sizes and small count cells; run it before
+committing new results.

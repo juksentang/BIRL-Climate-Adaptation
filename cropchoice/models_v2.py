@@ -57,7 +57,7 @@ import jax.numpy as jnp
 import numpyro.distributions as dist
 from numpyro import plate, sample, deterministic
 
-from src.config import (S_MAX, EPS_FRAC, RHO_LO, RHO_HI, LOG_BETA_LO, LOG_BETA_HI,
+from cropchoice.config import (S_MAX, EPS_FRAC, RHO_LO, RHO_HI, LOG_BETA_LO, LOG_BETA_HI,
                         P_TAYLOR, QUAD_W, LOG_CLIP)
 
 INFEASIBLE_LOGIT = -1e10

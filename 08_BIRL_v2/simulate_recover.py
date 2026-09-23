@@ -39,7 +39,6 @@ import time
 from datetime import datetime
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 parser = argparse.ArgumentParser(description="BIRL v2 simulation-recovery test")
 parser.add_argument("--mode", required=True, choices=["svi", "nuts"])
@@ -68,7 +67,7 @@ args = parser.parse_args()
 import numpy as np
 
 # src.config first: it sets numpyro's host device count BEFORE jax is imported
-from src.config import (DATA_DIR, OUT_DIR, HPDI_PROB, DEVICE_INFO, PLATFORM, N_DEVICES,  # noqa: E402
+from cropchoice.config import (DATA_DIR, OUT_DIR, HPDI_PROB, DEVICE_INFO, PLATFORM, N_DEVICES,  # noqa: E402
                         log, add_file_log, peak_rss_gb)
 import jax  # noqa: E402
 import jax.numpy as jnp  # noqa: E402
@@ -77,9 +76,9 @@ from numpyro.infer import SVI, Trace_ELBO  # noqa: E402
 from numpyro.infer.autoguide import AutoMultivariateNormal  # noqa: E402
 from numpyro.diagnostics import hpdi  # noqa: E402
 
-from src.data_loader import load_data, model_kwargs
-from src.models import v2_country, simulate_actions, derive_country_params, log_likelihood
-from src.mcmc_runner import (run_mcmc, samples_by_chain, choose_chain_method, save_posterior,
+from cropchoice.data import load_data, model_kwargs
+from cropchoice.models_v2 import v2_country, simulate_actions, derive_country_params, log_likelihood
+from cropchoice.inference import (run_mcmc, samples_by_chain, choose_chain_method, save_posterior,
                              load_posterior)
 
 REC_DIR = OUT_DIR / "recovery" / (args.mode + (f"_{args.tag}" if args.tag else ""))
