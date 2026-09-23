@@ -2,7 +2,6 @@
 
 A Bayesian structural discrete-choice model of smallholder crop and input choices, estimated on 222,023 plot-season observations from 15,644 households in six LSMS-ISA countries (Ethiopia, Malawi, Mali, Nigeria, Tanzania, Uganda; 2008–2023), and used to simulate crop choices, incomes and downside risk under 2050 climate (CMIP6, SSP2-4.5 / SSP5-8.5) and under transfer, floor and index-insurance policies.
 
-一句话：六国农户的作物选择结构模型，加 2050 气候与政策反事实。**三种跑法，按你有多少数据和算力选。**
 
 ---
 
