@@ -633,7 +633,7 @@ SVI 0.139 → MCMC 0.136（差异 < 3%）。β 是全局标量，被全部数据
 ### 9.4 复现指南
 
 ```bash
-cd "/home/yushentang/NF/Formal Analysis/06_BIRL_MCMC"
+cd "06_BIRL_MCMC"
 
 # 从 GCS 拉取结果（无需重跑 MCMC）
 ./outputs/pull_from_gcs.sh

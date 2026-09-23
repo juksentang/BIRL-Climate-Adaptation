@@ -1,0 +1,45 @@
+{
+  "mode": "full",
+  "chain_method": "vectorized",
+  "n_chains_requested": 4,
+  "warmup": 1000,
+  "samples": 1000,
+  "chunk": 250,
+  "mcmc_minutes": 17.015842099984486,
+  "peak_rss_gb": 5.27696,
+  "peak_device_gb": 2.510120448,
+  "device_memory": {
+    "device": "cuda:0",
+    "in_use_gb": 0.159168512,
+    "peak_gb": 2.510120448,
+    "limit_gb": 63.76390656
+  },
+  "tag": "",
+  "jax_version": "0.10.2",
+  "numpyro_version": "0.21.0",
+  "platform": "gpu",
+  "n_devices": 1,
+  "n_local_devices": 1,
+  "device_kinds": [
+    "NVIDIA H100 80GB HBM3"
+  ],
+  "host_devices_requested": 1,
+  "args": {
+    "variant": "v2_country",
+    "s_fixed": 0.3,
+    "s_max": 0.6,
+    "flat_priors": false,
+    "noncentered": false,
+    "timing": false,
+    "chains": 4,
+    "chain_method": null,
+    "warmup": 1000,
+    "samples": 1000,
+    "chunk": 250,
+    "resume": true,
+    "stop_after_chunk": null,
+    "seed": 42,
+    "n_ppc": 100,
+    "tag": null
+  }
+}

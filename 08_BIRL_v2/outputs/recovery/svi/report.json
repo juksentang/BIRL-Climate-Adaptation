@@ -1,0 +1,845 @@
+{
+  "date": "2026-09-20T02:30:18.324542",
+  "mode": "svi",
+  "countries": [
+    "Ethiopia",
+    "Malawi",
+    "Mali",
+    "Nigeria",
+    "Tanzania",
+    "Uganda"
+  ],
+  "m_c": [
+    19.85646915435791,
+    19.123496055603027,
+    129.95687866210938,
+    102.73678588867188,
+    26.026512145996094,
+    25.459810256958008
+  ],
+  "args": {
+    "mode": "svi",
+    "sets": [
+      "A",
+      "B"
+    ],
+    "svi_steps": 3000,
+    "svi_lr": 0.01,
+    "nuts_warmup": 500,
+    "nuts_samples": 500,
+    "nuts_chains": 2,
+    "chain_method": null,
+    "hier_priors": false,
+    "noncentered": false,
+    "s_max": 0.6,
+    "seed": 7,
+    "tol_rho": 0.25,
+    "tol_s": 0.05,
+    "tol_logbeta": 0.2,
+    "hpdi_frac": 0.8,
+    "tag": null,
+    "resume": false
+  },
+  "chain_method": "vectorized",
+  "hpdi_prob": 0.89,
+  "sets": {
+    "A": {
+      "truth": {
+        "rho_c": [
+          1.5,
+          3.0,
+          2.0,
+          1.0,
+          2.5,
+          3.5
+        ],
+        "s_c": [
+          0.2,
+          0.4,
+          0.3,
+          0.15,
+          0.5,
+          0.35
+        ],
+        "beta_c": [
+          3.0,
+          8.0,
+          5.0,
+          2.0,
+          6.0,
+          4.0
+        ],
+        "gamma_c": [
+          3.9712938308715824,
+          7.6493984222412115,
+          38.98706359863281,
+          15.41051788330078,
+          13.013256072998047,
+          8.910933589935302
+        ]
+      },
+      "agreement_with_observed": 0.04897240375997081,
+      "loglik_truth": -502633.0625,
+      "fit_info": {
+        "elapsed_s": 42.97284960746765,
+        "loss_first": 568062.1875,
+        "loss_last": 502732.6875,
+        "loss_min": 502723.1875,
+        "finite_losses": true,
+        "guide_median_latents": {
+          "rho_lat_c": [
+            -0.9262082576751709,
+            0.39716583490371704,
+            -0.43524521589279175,
+            -1.3436968326568604,
+            -0.044894203543663025,
+            0.777410626411438
+          ],
+          "lb_c": [
+            1.097638487815857,
+            2.069525957107544,
+            1.6211748123168945,
+            0.7019163370132446,
+            1.801348090171814,
+            1.3681856393814087
+          ],
+          "s_lat_c": [
+            -0.6689067482948303,
+            0.6739799976348877,
+            0.01072604302316904,
+            -2.7489843368530273,
+            1.5814815759658813,
+            0.3108060956001282
+          ],
+          "rho_c": [
+            1.4901037216186523,
+            3.0302317142486572,
+            2.025085210800171,
+            1.113823652267456,
+            2.495013952255249,
+            3.457097053527832
+          ],
+          "s_c": [
+            0.20324502885341644,
+            0.3974362909793854,
+            0.3016089200973511,
+            0.036086421459913254,
+            0.49764856696128845,
+            0.34624919295310974
+          ],
+          "gamma_c": [
+            4.035728454589844,
+            7.600371837615967,
+            39.1961555480957,
+            3.7074029445648193,
+            12.952056884765625,
+            8.815439224243164
+          ],
+          "beta_c": [
+            2.997080087661743,
+            7.921067237854004,
+            5.059030532836914,
+            2.017615556716919,
+            6.057808876037598,
+            3.9282169342041016
+          ]
+        }
+      },
+      "estimate": {
+        "rho_c": [
+          1.4901035870137656,
+          3.030232004051418,
+          2.025085150372547,
+          1.1138235883015626,
+          2.4950138356852554,
+          3.4570967049062724
+        ],
+        "s_c": [
+          0.20324500880940446,
+          0.3974362641661938,
+          0.3016088910285305,
+          0.03608642198996031,
+          0.4976485457599227,
+          0.34624920463187875
+        ],
+        "gamma_c": [
+          4.035728248201141,
+          7.600370830135811,
+          39.19615005480811,
+          3.707403009470813,
+          12.952055920657921,
+          8.815439051550259
+        ],
+        "beta_c": [
+          2.997080019413782,
+          7.921067302055723,
+          5.059030237769262,
+          2.017615436282314,
+          6.057808434328385,
+          3.9282170236318374
+        ]
+      },
+      "loglik_estimate": -502650.1875,
+      "loglik_diff": -17.125,
+      "tolerances_met": 17,
+      "tolerances_judged": 18,
+      "rows": [
+        {
+          "param": "rho_c",
+          "country": "Ethiopia",
+          "truth": 1.5,
+          "estimate": 1.4901035870137656,
+          "abs_err": 0.009896412986234449,
+          "tol": 0.25,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "rho_c",
+          "country": "Malawi",
+          "truth": 3.0,
+          "estimate": 3.030232004051418,
+          "abs_err": 0.030232004051418127,
+          "tol": 0.25,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "rho_c",
+          "country": "Mali",
+          "truth": 2.0,
+          "estimate": 2.025085150372547,
+          "abs_err": 0.025085150372547105,
+          "tol": 0.25,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "rho_c",
+          "country": "Nigeria",
+          "truth": 1.0,
+          "estimate": 1.1138235883015626,
+          "abs_err": 0.11382358830156258,
+          "tol": 0.25,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "rho_c",
+          "country": "Tanzania",
+          "truth": 2.5,
+          "estimate": 2.4950138356852554,
+          "abs_err": 0.004986164314744634,
+          "tol": 0.25,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "rho_c",
+          "country": "Uganda",
+          "truth": 3.5,
+          "estimate": 3.4570967049062724,
+          "abs_err": 0.04290329509372759,
+          "tol": 0.25,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "s_c",
+          "country": "Ethiopia",
+          "truth": 0.2,
+          "estimate": 0.20324500880940446,
+          "abs_err": 0.003245008809404454,
+          "tol": 0.05,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "s_c",
+          "country": "Malawi",
+          "truth": 0.4,
+          "estimate": 0.3974362641661938,
+          "abs_err": 0.002563735833806202,
+          "tol": 0.05,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "s_c",
+          "country": "Mali",
+          "truth": 0.3,
+          "estimate": 0.3016088910285305,
+          "abs_err": 0.0016088910285305125,
+          "tol": 0.05,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "s_c",
+          "country": "Nigeria",
+          "truth": 0.15,
+          "estimate": 0.03608642198996031,
+          "abs_err": 0.11391357801003968,
+          "tol": 0.05,
+          "judged": true,
+          "ok": false
+        },
+        {
+          "param": "s_c",
+          "country": "Tanzania",
+          "truth": 0.5,
+          "estimate": 0.4976485457599227,
+          "abs_err": 0.002351454240077322,
+          "tol": 0.05,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "s_c",
+          "country": "Uganda",
+          "truth": 0.35,
+          "estimate": 0.34624920463187875,
+          "abs_err": 0.003750795368121229,
+          "tol": 0.05,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "beta_c",
+          "country": "Ethiopia",
+          "truth": 3.0,
+          "estimate": 2.997080019413782,
+          "abs_err": 0.0009738008522528485,
+          "tol": 0.2,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "beta_c",
+          "country": "Malawi",
+          "truth": 8.0,
+          "estimate": 7.921067302055723,
+          "abs_err": 0.009915584572291802,
+          "tol": 0.2,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "beta_c",
+          "country": "Mali",
+          "truth": 5.0,
+          "estimate": 5.059030237769262,
+          "abs_err": 0.01173689988279425,
+          "tol": 0.2,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "beta_c",
+          "country": "Nigeria",
+          "truth": 2.0,
+          "estimate": 2.017615436282314,
+          "abs_err": 0.008769156453299343,
+          "tol": 0.2,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "beta_c",
+          "country": "Tanzania",
+          "truth": 6.0,
+          "estimate": 6.057808434328385,
+          "abs_err": 0.009588620943759008,
+          "tol": 0.2,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "beta_c",
+          "country": "Uganda",
+          "truth": 4.0,
+          "estimate": 3.9282170236318374,
+          "abs_err": 0.01810872173848188,
+          "tol": 0.2,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "gamma_c",
+          "country": "Ethiopia",
+          "truth": 3.9712938308715824,
+          "estimate": 4.035728248201141,
+          "abs_err": 0.06443441732955879,
+          "tol": null,
+          "judged": false,
+          "ok": null
+        },
+        {
+          "param": "gamma_c",
+          "country": "Malawi",
+          "truth": 7.6493984222412115,
+          "estimate": 7.600370830135811,
+          "abs_err": 0.04902759210540086,
+          "tol": null,
+          "judged": false,
+          "ok": null
+        },
+        {
+          "param": "gamma_c",
+          "country": "Mali",
+          "truth": 38.98706359863281,
+          "estimate": 39.19615005480811,
+          "abs_err": 0.20908645617529942,
+          "tol": null,
+          "judged": false,
+          "ok": null
+        },
+        {
+          "param": "gamma_c",
+          "country": "Nigeria",
+          "truth": 15.41051788330078,
+          "estimate": 3.707403009470813,
+          "abs_err": 11.703114873829968,
+          "tol": null,
+          "judged": false,
+          "ok": null
+        },
+        {
+          "param": "gamma_c",
+          "country": "Tanzania",
+          "truth": 13.013256072998047,
+          "estimate": 12.952055920657921,
+          "abs_err": 0.06120015234012577,
+          "tol": null,
+          "judged": false,
+          "ok": null
+        },
+        {
+          "param": "gamma_c",
+          "country": "Uganda",
+          "truth": 8.910933589935302,
+          "estimate": 8.815439051550259,
+          "abs_err": 0.09549453838504363,
+          "tol": null,
+          "judged": false,
+          "ok": null
+        }
+      ],
+      "md": [
+        "## Truth set A",
+        "",
+        "rho=[1.5, 3.0, 2.0, 1.0, 2.5, 3.5], s=[0.2, 0.4, 0.3, 0.15, 0.5, 0.35], beta=[3, 8, 5, 2, 6, 4]; simulated actions agree with observed on 4.9% of obs; log-lik(truth) = -502633.1",
+        "",
+        "### SVI point estimate (17/18 tolerances met; 43s, ELBO loss 568062 -> 502733; log-lik truth -502633.1 vs estimate -502650.2)",
+        "",
+        "| param | country | truth | estimate | abs err | tol | ok |\n|---|---|---|---|---|---|---|\n| rho_c | Ethiopia | 1.5 | 1.49 | 0.0099 | 0.25 | ok |\n| rho_c | Malawi | 3 | 3.03 | 0.0302 | 0.25 | ok |\n| rho_c | Mali | 2 | 2.025 | 0.0251 | 0.25 | ok |\n| rho_c | Nigeria | 1 | 1.114 | 0.114 | 0.25 | ok |\n| rho_c | Tanzania | 2.5 | 2.495 | 0.00499 | 0.25 | ok |\n| rho_c | Uganda | 3.5 | 3.457 | 0.0429 | 0.25 | ok |\n| s_c | Ethiopia | 0.2 | 0.2032 | 0.00325 | 0.05 | ok |\n| s_c | Malawi | 0.4 | 0.3974 | 0.00256 | 0.05 | ok |\n| s_c | Mali | 0.3 | 0.3016 | 0.00161 | 0.05 | ok |\n| s_c | Nigeria | 0.15 | 0.03609 | 0.114 | 0.05 | FAIL |\n| s_c | Tanzania | 0.5 | 0.4976 | 0.00235 | 0.05 | ok |\n| s_c | Uganda | 0.35 | 0.3462 | 0.00375 | 0.05 | ok |\n| beta_c | Ethiopia | 3 | 2.997 | 0.000974 | 0.20 | ok |\n| beta_c | Malawi | 8 | 7.921 | 0.00992 | 0.20 | ok |\n| beta_c | Mali | 5 | 5.059 | 0.0117 | 0.20 | ok |\n| beta_c | Nigeria | 2 | 2.018 | 0.00877 | 0.20 | ok |\n| beta_c | Tanzania | 6 | 6.058 | 0.00959 | 0.20 | ok |\n| beta_c | Uganda | 4 | 3.928 | 0.0181 | 0.20 | ok |\n| gamma_c | Ethiopia | 3.971 | 4.036 | 0.0644 | - | - |\n| gamma_c | Malawi | 7.649 | 7.6 | 0.049 | - | - |\n| gamma_c | Mali | 38.99 | 39.2 | 0.209 | - | - |\n| gamma_c | Nigeria | 15.41 | 3.707 | 11.7 | - | - |\n| gamma_c | Tanzania | 13.01 | 12.95 | 0.0612 | - | - |\n| gamma_c | Uganda | 8.911 | 8.815 | 0.0955 | - | - |",
+        ""
+      ]
+    },
+    "B": {
+      "truth": {
+        "rho_c": [
+          0.5,
+          4.5,
+          1.0,
+          3.0,
+          2.0,
+          1.5
+        ],
+        "s_c": [
+          0.55,
+          0.1,
+          0.58,
+          0.05,
+          0.3,
+          0.45
+        ],
+        "beta_c": [
+          10.0,
+          1.5,
+          4.0,
+          6.0,
+          2.0,
+          8.0
+        ],
+        "gamma_c": [
+          10.921058034896852,
+          1.9123496055603029,
+          75.37498962402343,
+          5.136839294433594,
+          7.807953643798828,
+          11.456914615631105
+        ]
+      },
+      "agreement_with_observed": 0.051913540489048435,
+      "loglik_truth": -396961.5625,
+      "fit_info": {
+        "elapsed_s": 29.85109806060791,
+        "loss_first": 528536.4375,
+        "loss_last": 402989.3125,
+        "loss_min": 402972.8125,
+        "finite_losses": true,
+        "guide_median_latents": {
+          "rho_lat_c": [
+            -2.4174270629882812,
+            1.6779732704162598,
+            -1.5286980867385864,
+            0.36004942655563354,
+            -0.45894572138786316,
+            -0.26155886054039
+          ],
+          "lb_c": [
+            2.302117347717285,
+            0.36654385924339294,
+            1.3700778484344482,
+            1.7897882461547852,
+            0.6943521499633789,
+            1.841228723526001
+          ],
+          "s_lat_c": [
+            2.354670286178589,
+            -1.7570616006851196,
+            3.5770318508148193,
+            -2.324826717376709,
+            0.05527959018945694,
+            -6.231457710266113
+          ],
+          "rho_c": [
+            0.5010817646980286,
+            4.228916168212891,
+            0.973102867603302,
+            2.9863569736480713,
+            1.9974563121795654,
+            2.2314045429229736
+          ],
+          "s_c": [
+            0.5479828715324402,
+            0.08829525113105774,
+            0.5836811661720276,
+            0.05345255136489868,
+            0.3082898259162903,
+            0.0011776339961215854
+          ],
+          "gamma_c": [
+            10.881004333496094,
+            1.688513994216919,
+            75.85338592529297,
+            5.491543292999268,
+            8.023709297180176,
+            0.02998233772814274
+          ],
+          "beta_c": [
+            9.995323181152344,
+            1.442739725112915,
+            3.935657024383545,
+            5.988184452056885,
+            2.002411365509033,
+            6.304279804229736
+          ]
+        }
+      },
+      "estimate": {
+        "rho_c": [
+          0.501081721687948,
+          4.228916263594986,
+          0.9731028303684471,
+          2.98635675402862,
+          1.9974561933772106,
+          2.2314046677192416
+        ],
+        "s_c": [
+          0.5479828389421443,
+          0.08829524138450964,
+          0.5836811162573184,
+          0.05345255327448555,
+          0.30828982760846574,
+          0.0011776339436937418
+        ],
+        "gamma_c": [
+          10.881004338572167,
+          1.6885137003451873,
+          75.85337600281689,
+          5.491543520963649,
+          8.023708942738775,
+          0.029982336758595837
+        ],
+        "beta_c": [
+          9.995323640990074,
+          1.4427396766332925,
+          3.9356570682862873,
+          5.988184311065746,
+          2.0024113913414916,
+          6.304279720803242
+        ]
+      },
+      "loglik_estimate": -402897.5625,
+      "loglik_diff": -5936.0,
+      "tolerances_met": 14,
+      "tolerances_judged": 18,
+      "rows": [
+        {
+          "param": "rho_c",
+          "country": "Ethiopia",
+          "truth": 0.5,
+          "estimate": 0.501081721687948,
+          "abs_err": 0.0010817216879479563,
+          "tol": 0.25,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "rho_c",
+          "country": "Malawi",
+          "truth": 4.5,
+          "estimate": 4.228916263594986,
+          "abs_err": 0.27108373640501426,
+          "tol": 0.25,
+          "judged": true,
+          "ok": false
+        },
+        {
+          "param": "rho_c",
+          "country": "Mali",
+          "truth": 1.0,
+          "estimate": 0.9731028303684471,
+          "abs_err": 0.026897169631552864,
+          "tol": 0.25,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "rho_c",
+          "country": "Nigeria",
+          "truth": 3.0,
+          "estimate": 2.98635675402862,
+          "abs_err": 0.01364324597137978,
+          "tol": 0.25,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "rho_c",
+          "country": "Tanzania",
+          "truth": 2.0,
+          "estimate": 1.9974561933772106,
+          "abs_err": 0.002543806622789413,
+          "tol": 0.25,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "rho_c",
+          "country": "Uganda",
+          "truth": 1.5,
+          "estimate": 2.2314046677192416,
+          "abs_err": 0.7314046677192416,
+          "tol": 0.25,
+          "judged": true,
+          "ok": false
+        },
+        {
+          "param": "s_c",
+          "country": "Ethiopia",
+          "truth": 0.55,
+          "estimate": 0.5479828389421443,
+          "abs_err": 0.0020171610578557653,
+          "tol": 0.05,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "s_c",
+          "country": "Malawi",
+          "truth": 0.1,
+          "estimate": 0.08829524138450964,
+          "abs_err": 0.011704758615490363,
+          "tol": 0.05,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "s_c",
+          "country": "Mali",
+          "truth": 0.58,
+          "estimate": 0.5836811162573184,
+          "abs_err": 0.003681116257318484,
+          "tol": 0.05,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "s_c",
+          "country": "Nigeria",
+          "truth": 0.05,
+          "estimate": 0.05345255327448555,
+          "abs_err": 0.0034525532744855494,
+          "tol": 0.05,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "s_c",
+          "country": "Tanzania",
+          "truth": 0.3,
+          "estimate": 0.30828982760846574,
+          "abs_err": 0.00828982760846575,
+          "tol": 0.05,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "s_c",
+          "country": "Uganda",
+          "truth": 0.45,
+          "estimate": 0.0011776339436937418,
+          "abs_err": 0.44882236605630627,
+          "tol": 0.05,
+          "judged": true,
+          "ok": false
+        },
+        {
+          "param": "beta_c",
+          "country": "Ethiopia",
+          "truth": 10.0,
+          "estimate": 9.995323640990074,
+          "abs_err": 0.00046774527676074484,
+          "tol": 0.2,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "beta_c",
+          "country": "Malawi",
+          "truth": 1.5,
+          "estimate": 1.4427396766332925,
+          "abs_err": 0.038921248864771496,
+          "tol": 0.2,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "beta_c",
+          "country": "Mali",
+          "truth": 4.0,
+          "estimate": 3.9356570682862873,
+          "abs_err": 0.01621651268544233,
+          "tol": 0.2,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "beta_c",
+          "country": "Nigeria",
+          "truth": 6.0,
+          "estimate": 5.988184311065746,
+          "abs_err": 0.001971223073269801,
+          "tol": 0.2,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "beta_c",
+          "country": "Tanzania",
+          "truth": 2.0,
+          "estimate": 2.0024113913414916,
+          "abs_err": 0.001204969403433509,
+          "tol": 0.2,
+          "judged": true,
+          "ok": true
+        },
+        {
+          "param": "beta_c",
+          "country": "Uganda",
+          "truth": 8.0,
+          "estimate": 6.304279720803242,
+          "abs_err": 0.23821281815383477,
+          "tol": 0.2,
+          "judged": true,
+          "ok": false
+        },
+        {
+          "param": "gamma_c",
+          "country": "Ethiopia",
+          "truth": 10.921058034896852,
+          "estimate": 10.881004338572167,
+          "abs_err": 0.04005369632468536,
+          "tol": null,
+          "judged": false,
+          "ok": null
+        },
+        {
+          "param": "gamma_c",
+          "country": "Malawi",
+          "truth": 1.9123496055603029,
+          "estimate": 1.6885137003451873,
+          "abs_err": 0.22383590521511554,
+          "tol": null,
+          "judged": false,
+          "ok": null
+        },
+        {
+          "param": "gamma_c",
+          "country": "Mali",
+          "truth": 75.37498962402343,
+          "estimate": 75.85337600281689,
+          "abs_err": 0.47838637879345924,
+          "tol": null,
+          "judged": false,
+          "ok": null
+        },
+        {
+          "param": "gamma_c",
+          "country": "Nigeria",
+          "truth": 5.136839294433594,
+          "estimate": 5.491543520963649,
+          "abs_err": 0.35470422653005507,
+          "tol": null,
+          "judged": false,
+          "ok": null
+        },
+        {
+          "param": "gamma_c",
+          "country": "Tanzania",
+          "truth": 7.807953643798828,
+          "estimate": 8.023708942738775,
+          "abs_err": 0.21575529893994716,
+          "tol": null,
+          "judged": false,
+          "ok": null
+        },
+        {
+          "param": "gamma_c",
+          "country": "Uganda",
+          "truth": 11.456914615631105,
+          "estimate": 0.029982336758595837,
+          "abs_err": 11.426932278872508,
+          "tol": null,
+          "judged": false,
+          "ok": null
+        }
+      ],
+      "md": [
+        "## Truth set B",
+        "",
+        "rho=[0.5, 4.5, 1.0, 3.0, 2.0, 1.5], s=[0.55, 0.1, 0.58, 0.05, 0.3, 0.45], beta=[10, 1.5, 4, 6, 2, 8]; simulated actions agree with observed on 5.2% of obs; log-lik(truth) = -396961.6",
+        "",
+        "### SVI point estimate (14/18 tolerances met; 30s, ELBO loss 528536 -> 402989; log-lik truth -396961.6 vs estimate -402897.6)",
+        "",
+        "| param | country | truth | estimate | abs err | tol | ok |\n|---|---|---|---|---|---|---|\n| rho_c | Ethiopia | 0.5 | 0.5011 | 0.00108 | 0.25 | ok |\n| rho_c | Malawi | 4.5 | 4.229 | 0.271 | 0.25 | FAIL |\n| rho_c | Mali | 1 | 0.9731 | 0.0269 | 0.25 | ok |\n| rho_c | Nigeria | 3 | 2.986 | 0.0136 | 0.25 | ok |\n| rho_c | Tanzania | 2 | 1.997 | 0.00254 | 0.25 | ok |\n| rho_c | Uganda | 1.5 | 2.231 | 0.731 | 0.25 | FAIL |\n| s_c | Ethiopia | 0.55 | 0.548 | 0.00202 | 0.05 | ok |\n| s_c | Malawi | 0.1 | 0.0883 | 0.0117 | 0.05 | ok |\n| s_c | Mali | 0.58 | 0.5837 | 0.00368 | 0.05 | ok |\n| s_c | Nigeria | 0.05 | 0.05345 | 0.00345 | 0.05 | ok |\n| s_c | Tanzania | 0.3 | 0.3083 | 0.00829 | 0.05 | ok |\n| s_c | Uganda | 0.45 | 0.001178 | 0.449 | 0.05 | FAIL |\n| beta_c | Ethiopia | 10 | 9.995 | 0.000468 | 0.20 | ok |\n| beta_c | Malawi | 1.5 | 1.443 | 0.0389 | 0.20 | ok |\n| beta_c | Mali | 4 | 3.936 | 0.0162 | 0.20 | ok |\n| beta_c | Nigeria | 6 | 5.988 | 0.00197 | 0.20 | ok |\n| beta_c | Tanzania | 2 | 2.002 | 0.0012 | 0.20 | ok |\n| beta_c | Uganda | 8 | 6.304 | 0.238 | 0.20 | FAIL |\n| gamma_c | Ethiopia | 10.92 | 10.88 | 0.0401 | - | - |\n| gamma_c | Malawi | 1.912 | 1.689 | 0.224 | - | - |\n| gamma_c | Mali | 75.37 | 75.85 | 0.478 | - | - |\n| gamma_c | Nigeria | 5.137 | 5.492 | 0.355 | - | - |\n| gamma_c | Tanzania | 7.808 | 8.024 | 0.216 | - | - |\n| gamma_c | Uganda | 11.46 | 0.02998 | 11.4 | - | - |",
+        ""
+      ]
+    }
+  },
+  "jax_version": "0.10.2",
+  "numpyro_version": "0.21.0",
+  "platform": "gpu",
+  "n_devices": 1,
+  "n_local_devices": 1,
+  "device_kinds": [
+    "NVIDIA H100 80GB HBM3 MIG 1g.10gb"
+  ],
+  "host_devices_requested": 1,
+  "verdict": "SMOKE",
+  "verdict_reason": "SVI point estimates: 31/36 tolerances met (smoke check only; the PASS verdict is judged on --mode nuts)",
+  "peak_rss_gb": 1.678384
+}
